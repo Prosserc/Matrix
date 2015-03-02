@@ -185,6 +185,29 @@ namespace Matrix
             return min;
         }
 
+        // changes ijk to ikj loop for performance optimisation
+        public static Matrix DotProduct(Matrix a, Matrix b)
+        {
+            // initialise result matrix
+            var res = new Matrix(a.Rows, b.Cols);
+
+            for (var i = 0; i < a.Rows; i++)
+            {
+                double[] ithRowOfA = a[i];
+                double[] ithRowOfResult = res[i];
+                for (var k = 0; k < a.Cols; k++)
+                {
+                    double[] kthRowOfB = b[k];
+                    double indexIKOfA = ithRowOfA[k];
+                    for (var j = 0; j < b.Cols; j++)
+                    {
+                        ithRowOfResult[j] += indexIKOfA * kthRowOfB[j];
+                    }
+                }
+            }
+            return res;
+        }
+
 
         // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
         // * * * * * * * * * * * * * * * * *   O P E R A T O R   O V E R L O A D S   e t c   * * * * * * * * * * * * * * * * * 
@@ -199,26 +222,7 @@ namespace Matrix
             {
                 throw new IncompatibleMatrixDimentionsException(IncompatibleMatrixDimentionsException.MatrixOperators.Multiply);
             }
-
-            // initialise result matrix
-            var res = new Matrix(a.Rows, b.Cols);
-
-            // loop over rows in first matrix
-            for (var i = 0; i < a.Rows; i++)
-            {
-                // changed order to ikj (rather than natural ijk) to optimise performance -- appears to save ~10% time
-                // got cell of new matix, need to myltiply each element of row in first but each element of col in second matrix
-                for (var k = 0; k < a.Cols; k++)
-                {
-                    // loop over cols in second matrix
-                    for (var j = 0; j < b.Cols; j++)
-                    {
-                        // performance is significantly reduced on large matricies if indexing matricies directly rather than via _val
-                        res._val[i][j] += (a._val[i][k] * b._val[k][j]);
-                    }
-                }
-            }
-            return res;
+            return DotProduct(a, b);
         }
 
         // allow for indexing directly on Matrix rather than just Matrix.val
