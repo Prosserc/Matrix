@@ -4,3 +4,5 @@ C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.exe
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.pdb
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.Properties.Resources.resources
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
