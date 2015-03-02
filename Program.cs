@@ -40,8 +40,8 @@ namespace Matrix
             Debug.WriteLine("Test equality with one matrix, equality should show as false: " + (x == y));
 
             // test larger multiplication
-            var testMatrixMultiplicationWith100RowsAndCols = new MatrixMultiplicationTest(100);
-            var testMatrixMultiplicationWith250RowsAndCols = new MatrixMultiplicationTest(250);
+            new MatrixMultiplicationTest(100);
+            new MatrixMultiplicationTest(500);
             //var testMatrixMultiplicationWith2000RowsAndCols = new MatrixMultiplicationTest(2000);
             //var testMatrixMultiplicationWith10000RowsAnd200ColsBy200RowsAnd10000Cols =
             //    new MatrixMultiplicationTest(10000, 200, 200, 10000);

@@ -190,16 +190,17 @@ namespace Matrix
             var res = new Matrix(new double[a.Rows, b.Cols]);
 
             // loop over rows in first matrix
-            for (var n = 0; n < a.Rows; n++)
+            for (var i = 0; i < a.Rows; i++)
             {
-                // loop over cols in second matrix
-                for (var m = 0; m < b.Cols; m++)
+                // changed order to ikj (rather than natural ijk) to optimise performance -- appears to save ~10% time
+                // got cell of new matix, need to myltiply each element of row in first but each element of col in second matrix
+                for (var k = 0; k < a.Cols; k++)
                 {
-                    // got cell of new matix, need to myltiply each element of row in first but each element of col in second matrix
-                    for (var k = 0; k < a.Cols; k++)
+                    // loop over cols in second matrix
+                    for (var j = 0; j < b.Cols; j++)
                     {
                         // performance is significantly reduced on large matricies if indexing matricies directly rather than via _val
-                        res._val[n, m] += (a._val[n, k] * b._val[k, m]);
+                        res._val[i, j] += (a._val[i, k] * b._val[k, j]);
                     }
                 }
             }
