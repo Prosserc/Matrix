@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Matrix
 {
@@ -191,21 +192,27 @@ namespace Matrix
             // initialise result matrix
             var res = new Matrix(a.Rows, b.Cols);
 
-            for (var i = 0; i < a.Rows; i++)
+            // parallel pLinq query to do multiple rows at once
+            var source = Enumerable.Range(0, a.Rows);
+            var query = from num in source.AsParallel()
+                        select num;
+            query.ForAll((i) => DotProductRowParallel(a, b, res, i));
+            return res;
+        }
+
+        private static void DotProductRowParallel(Matrix a, Matrix b, Matrix res, int i)
+        {
+            double[] ithRowOfA = a[i];
+            double[] ithRowOfResult = res[i];
+            for (var k = 0; k < a.Cols; k++)
             {
-                double[] ithRowOfA = a[i];
-                double[] ithRowOfResult = res[i];
-                for (var k = 0; k < a.Cols; k++)
+                double[] kthRowOfB = b[k];
+                double indexIKOfA = ithRowOfA[k];
+                for (var j = 0; j < b.Cols; j++)
                 {
-                    double[] kthRowOfB = b[k];
-                    double indexIKOfA = ithRowOfA[k];
-                    for (var j = 0; j < b.Cols; j++)
-                    {
-                        ithRowOfResult[j] += indexIKOfA * kthRowOfB[j];
-                    }
+                    ithRowOfResult[j] += indexIKOfA * kthRowOfB[j];
                 }
             }
-            return res;
         }
 
 
