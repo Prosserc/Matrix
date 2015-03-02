@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 
 namespace Matrix
@@ -154,7 +153,7 @@ namespace Matrix
         public double Max()
         {
             var max = -1 * (Math.Pow(2, 63) +1); // min unigned 64bit int
-            Debug.WriteLine("max initialised to: " + max);
+            //Debug.WriteLine("max initialised to: " + max);
             for (var n = 0; n < Rows; n++)
             {
                 for (var m = 0; m < Cols; m++)
@@ -172,7 +171,7 @@ namespace Matrix
         public double Min()
         {
             var min = (Math.Pow(2, 63) - 1); // max unsigned 64 bit int
-            Debug.WriteLine("min initialised to: " + min);
+            //Debug.WriteLine("min initialised to: " + min);
             for (var n = 0; n < Rows; n++)
             {
                 for (var m = 0; m < Cols; m++)
@@ -223,6 +222,7 @@ namespace Matrix
         }
 
         // allow for indexing directly on Matrix rather than just Matrix.val
+        // only need to facilitate indexing on rows, then default array behaviour will allow user to index within this row e.g. this[0][0] to get first row / col
         public double[] this[int rownum]
         {
             get { return _val[rownum]; }
@@ -234,10 +234,19 @@ namespace Matrix
         {
             try
             {
-                return a._val == b._val;
+                for (var n = 0; n < a.Rows; n++)
+                {
+                    for (var m = 0; m < a.Cols; m ++)
+                    {
+                        // loop over rows / cols, if any different return false
+                        if ((a[n][m] != b[n][m])) return false;
+                    }
+                }
+                return true;
             }
             catch (NullReferenceException e)
             {
+                // return true if both null i.e. they match, false otherwise as one is null and other isn't
                 return a._val == null && b._val == null;
             }
         }
@@ -246,10 +255,19 @@ namespace Matrix
         {
             try
             {
-                return a._val != b._val;
+                for (var n = 0; n < a.Rows; n++)
+                {
+                    for (var m = 0; m < a.Cols; m++)
+                    {
+                        // loop over rows/ cols if any different return true (i.e. true that the matricies are not equal)
+                        if ((a[n][m] != b[n][m])) return true;
+                    }
+                }
+                return false;
             }
             catch (NullReferenceException e)
             {
+                // return true (i.e. they do not match) if one and only one is null (XOR)
                 return a._val == null ^ b._val == null;
             }
         }
@@ -331,12 +349,12 @@ namespace Matrix
         }
 
         // ******************************************************
-        // system generated to g owith equality operators...
+        // system generated to go with equality operators...
         // ******************************************************
 
         protected bool Equals(Matrix other)
         {
-            return Equals(_val, other._val) && Rows == other.Rows && Cols == other.Cols;
+            return this==other;
         }
 
         public override bool Equals(object obj)

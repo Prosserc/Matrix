@@ -3,15 +3,15 @@ using System.Diagnostics;
 
 namespace Matrix.Tests
 {
-    class MatrixMultiplicationTest
+    class MatrixMultiplicationTimeTest
     {
-        public MatrixMultiplicationTest(int m1Rows, int m1Cols, int m2Rows, int m2Cols)
+        public MatrixMultiplicationTimeTest(int m1Rows, int m1Cols, int m2Rows, int m2Cols)
         {
             Multiply(m1Rows, m1Cols, m2Rows, m2Cols);
         }
 
         // shorthand for constructor with square matricies
-        public MatrixMultiplicationTest(int squareMatrixDimentions)
+        public MatrixMultiplicationTimeTest(int squareMatrixDimentions)
         {
             Multiply(squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions);
         }
