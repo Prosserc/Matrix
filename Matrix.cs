@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Matrix
 {
@@ -15,11 +11,12 @@ namespace Matrix
 
     class Matrix
     {
-        private double[,] _val;
+        private double[][] _val;
         public int Rows { get; set; }
         public int Cols { get; set; }
 
-        public Matrix(double[,] values)
+        // initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
+        public Matrix(double[][] values)
         {
             PopulateMatrix(values);
         }
@@ -37,17 +34,34 @@ namespace Matrix
             }
             else
             {
-                PopulateMatrix(new double[rows, cols]);   
+                _val = new double[rows][];
+                CreateColumns(rows, cols);
+                PopulateMatrix(_val);   
             }
         }
 
         // allow creation of empty Matrix
         public Matrix()
-        {}
+        {
+            // was initially going too allow this, but hit issues when trying to assign new arrays to rows as rows have not been initialised
+            throw new NotImplementedException();
+        }
+
+        // using jagged array need to initialise each column
+        public void CreateColumns(int rows, int cols)
+        {
+            // create each col
+            for (var i = 0; i < rows; i++)
+            {
+                _val[i] = new double[cols];
+            }
+        }
 
         public void PopulateMatrix(int rows, int cols, bool initialiseWithRandomValues = false, double initialiseTo = 0)
         {
-            _val = new double[rows, cols];
+            _val = new double[rows][];
+            CreateColumns(rows, cols);
+            PopulateMatrix(_val);  
             Rows = rows;
             Cols = cols;
 
@@ -63,7 +77,7 @@ namespace Matrix
             SetRowAndColSize();
         }
 
-        public void PopulateMatrix(double[,] values)
+        public void PopulateMatrix(double[][] values)
         {
             if (values == null || values.Length == 0)
             {
@@ -79,8 +93,9 @@ namespace Matrix
 
         private void SetRowAndColSize()
         {
-            Rows  = _val.GetLength(0); 
-            Cols = _val.Length / Rows;
+            Rows  = _val.Length; 
+            // even though it is technically implemented as a jagged array, each sub array is the same size so just getting len of the first row is fine
+            Cols = _val[0].Length;
         }
 
         private void InitialiseMatrix(double defaultVal = 0, bool randInit = true)
@@ -90,7 +105,7 @@ namespace Matrix
             {
                 for (var m = 0; m < Cols; m++)
                 {
-                    this[n, m] = randInit ? rnd.NextDouble() : defaultVal;
+                    _val[n][m] = randInit ? rnd.NextDouble() : defaultVal;
                 }
             }
         }
@@ -129,10 +144,10 @@ namespace Matrix
             {
                 for (var m = 0; m < Cols; m++)
                 {
-                    sum += _val[n, m];
+                    sum += _val[n][m];
                 }
             }
-            return sum / _val.Length;
+            return sum / (Rows * Cols);
         }
 
         // use with GetRows / GetCols rather than implementint RowMax / ColMax
@@ -144,9 +159,9 @@ namespace Matrix
             {
                 for (var m = 0; m < Cols; m++)
                 {
-                    if (_val[n, m] > max)
+                    if (_val[n][m] > max)
                     {
-                        max = _val[n, m];
+                        max = _val[n][m];
                     }
                 }
             }
@@ -162,9 +177,9 @@ namespace Matrix
             {
                 for (var m = 0; m < Cols; m++)
                 {
-                    if (_val[n, m] < min)
+                    if (_val[n][m] < min)
                     {
-                        min = _val[n, m];
+                        min = _val[n][m];
                     }
                 }
             }
@@ -187,7 +202,7 @@ namespace Matrix
             }
 
             // initialise result matrix
-            var res = new Matrix(new double[a.Rows, b.Cols]);
+            var res = new Matrix(a.Rows, b.Cols);
 
             // loop over rows in first matrix
             for (var i = 0; i < a.Rows; i++)
@@ -200,7 +215,7 @@ namespace Matrix
                     for (var j = 0; j < b.Cols; j++)
                     {
                         // performance is significantly reduced on large matricies if indexing matricies directly rather than via _val
-                        res._val[i, j] += (a._val[i, k] * b._val[k, j]);
+                        res._val[i][j] += (a._val[i][k] * b._val[k][j]);
                     }
                 }
             }
@@ -208,10 +223,10 @@ namespace Matrix
         }
 
         // allow for indexing directly on Matrix rather than just Matrix.val
-        public double this[int row, int col]
+        public double[] this[int rownum]
         {
-            get { return _val[row, col]; }
-            set { _val[row, col] = value; }
+            get { return _val[rownum]; }
+            set { _val[rownum] = value; }
         }
 
         // allow for comparisons directly on matrix so you don't have to do matrix.Val
@@ -305,7 +320,7 @@ namespace Matrix
                         }
                         else
                         {
-                            str += this[n, m].ToString(formatStr).PadLeft(len + 2, ' ');
+                            str += _val[n][m].ToString(formatStr).PadLeft(len + 2, ' ');
                         }
                     }
                 }

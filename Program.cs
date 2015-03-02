@@ -12,14 +12,16 @@ namespace Matrix
     {
         static void Main(string[] args)
         {
-            var a = new Matrix( new double[,] { { 4,  5, -5}, 
-                                                {-1, -4, -2}, 
-                                                {-3,  1,  5}, 
-                                                { 2,  1,  4} } );
+            var a = new Matrix(4, 3);
+            a[0] = new double[] { 4,  5, -5};
+            a[1] = new double[] {-1, -4, -2};
+            a[2] = new double[] {-3,  1,  5}; 
+            a[3] = new double[] { 2,  1,  4};
 
-            var b = new Matrix( new double[,] { { -4,  4, -1,  3, -4 }, 
-                                                { -1, -5, -5,  4, -5 }, 
-                                                { -1, -1,  0, -1,  1 } }) ;
+            var b = new Matrix(3, 5);
+            b[0] = new double[] {-4,  4, -1,  3, -4};
+            b[1] = new double[] {-1, -5, -5,  4, -5};
+            b[2] = new double[] {-1, -1,  0, -1,  1};
 
             Debug.WriteLine("Matrix a set to: " + Environment.NewLine + a);
             Debug.WriteLine("Matrix b set to: " + Environment.NewLine + b);
@@ -29,22 +31,12 @@ namespace Matrix
             Debug.WriteLine("Result of dot product (Matrix c) set to: " + Environment.NewLine + c);
 
             // allows indexing to get cell e.g.
-            Debug.WriteLine("a[0,0] set to: " + a[0,0]);
-
-            // test equality operator
-            var x = new Matrix();
-            var y = new Matrix();
-            Debug.WriteLine("Test equality with empty matricies, both empty, equality should show as true: " + (x == y));
-            y.PopulateMatrix(10, 10, initialiseWithRandomValues: true);
-            Debug.WriteLine("y initialised to : " + Environment.NewLine + y);
-            Debug.WriteLine("Test equality with one matrix, equality should show as false: " + (x == y));
+            Debug.WriteLine("a[0][0] set to: " + a[0][0]);
 
             // test larger multiplication
             new MatrixMultiplicationTest(100);
             new MatrixMultiplicationTest(500);
-            //var testMatrixMultiplicationWith2000RowsAndCols = new MatrixMultiplicationTest(2000);
-            //var testMatrixMultiplicationWith10000RowsAnd200ColsBy200RowsAnd10000Cols =
-            //    new MatrixMultiplicationTest(10000, 200, 200, 10000);
+            //new MatrixMultiplicationTest(10000, 200, 200, 10000); // test none square array
         }
     }
 }
