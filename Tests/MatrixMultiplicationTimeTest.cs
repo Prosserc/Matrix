@@ -13,6 +13,8 @@ namespace Matrix.Tests
 
         private static void Multiply(int m1Rows, int m1Cols, int m2Rows, int m2Cols)
         {
+            Debug.Write(Environment.NewLine);
+
             // prep data
             var m1 = new Matrix(m1Rows, m1Cols, initialiseWithRandomValues: true);
             var m2 = new Matrix(m2Rows, m2Cols, initialiseWithRandomValues: true);

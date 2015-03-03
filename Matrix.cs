@@ -114,26 +114,48 @@ namespace Matrix
         public void T()
         {
             throw new NotImplementedException();
+            // switch rows / cols
+            //double [][] _valNew = new
         }
 
         // gets a Transposed copy of the matrix without changing the original
         public Matrix GetT()
         {
-            var x = new Matrix(_val);
+            double[][] _valCopy = _val.Select(s => s.ToArray()).ToArray();
+            var x = new Matrix(_valCopy);
             x.T();
             return x;
         }
 
         // gets row(s) from the Matrix (index is zero based)
-        public double[] GetRows(int indexFrom, int rows = 1)
+        public Matrix GetRows(int indexFrom, int numRows)
+        // *** consider whether changes to the values returned should result in changes to the Matrix - if not need to make copies? ***
         {
-            throw new NotImplementedException();
+            var result = new double[numRows][];
+                
+            for (var i = 0; i < numRows; i++)
+            {
+                result[i] = _val[i+indexFrom];
+            }
+            return new Matrix(result);
         }
 
         // gets column(s) from the Matix (index is zero based)
-        public double[] GetCols(int indexFrom, int cols = 1)
+        public Matrix GetCols(int indexFrom, int numCols)
+        // *** consider whether changes to the values returned should result in changes to the Matrix - if not need to make copies? ***
         {
             throw new NotImplementedException();
+            //var result = new double[Rows][];
+
+            //for (var j = 0; j < numCols; j++)
+            //{
+            //    var tmpCol = _val.Select(row => row[indexFrom + j]);
+            //    for (var i = 0; i < Rows; i++)
+            //    {
+            //        result[i][j] = _val[i][indexFrom + j];
+            //    }
+            //}
+            //return new Matrix(result);
         }
 
         // use with GetRows / GetCols rather than implementint RowAverage / ColAverage

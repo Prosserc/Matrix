@@ -7,7 +7,6 @@ namespace Matrix.Tests
     {
         public static void Multiply(Matrix a, Matrix b, Matrix cShouldBe)
         {
-
             Debug.WriteLine(string.Format("Matrix a set to: {0}{1}", Environment.NewLine, a));
             Debug.WriteLine(string.Format("Matrix b set to: {0}{1}", Environment.NewLine, b));
 

@@ -1,4 +1,6 @@
-﻿namespace Matrix.Tests
+﻿using Matrix.Tests.Data;
+
+namespace Matrix.Tests
 {
     class TestRunner
     {   
@@ -15,7 +17,16 @@
 
             // test indexing
             MatrixIndexerTest.GetViaIndex(a, 1, 0, -1);
-            MatrixIndexerTest.SetViaIndex(a, 1, 0);
+            MatrixIndexerTest.SetViaIndex(a, 1, 0); // value only changed in local scope of test
+
+            // test getRows
+            MatrixGetRowsTest.GetSingleRow(a);
+            MatrixGetRowsTest.GetMultipleRows(a);
+            MatrixGetRowsTest.GetAndManipulateRowsToCheckThatChangesPersistInOriginalMatrix(a);
+
+            //test getCols
+            //MatrixGetColsTest.GetSingleCol(a);
+            //MatrixGetColsTest.GetMultipleCols(a);
 
             // try increasing dimentions (of square matricies) by powers of 2 to get approx formula for running time
             MatrixMultiplicationTimeTest.Multiply(128);
