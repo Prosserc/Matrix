@@ -9,7 +9,7 @@ namespace Matrix
     // initially just work on getting basic functionality working, not yet optimised for performance
     // ***********************************************************************************************
 
-    class Matrix
+    public class Matrix
     {
         private double[][] _val;
         public int Rows { get; set; }
@@ -121,9 +121,20 @@ namespace Matrix
         // Transpose method
         public void T()
         {
-            throw new NotImplementedException();
-            // switch rows / cols
-            //double [][] _valNew = new
+            // initialise new double array with switched rows / cols
+            var _newVal = new double[Cols][];
+            for (var i = 0; i < Cols; i++)
+            {
+                _newVal[i] = new double[Rows];
+                
+                // populate row of transposed array
+                for (var j = 0; j < Rows; j++ )
+                {
+                    _newVal[i][j] = _val[j][i];
+                }
+            }
+            _val = _newVal;
+            SetRowAndColSize();
         }
 
         // gets a Transposed copy of the matrix without changing the original

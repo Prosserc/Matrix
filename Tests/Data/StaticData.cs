@@ -5,6 +5,7 @@
         public Matrix A { get; set; }
         public Matrix B { get; set; }
         public Matrix CShouldBe { get; set; }
+        public Matrix CTransposedShouldBe { get; set; }
 
         public StaticData()
         {
@@ -24,6 +25,13 @@
             CShouldBe[1] = new double[] { 10, 18, 21, -17, 22 };
             CShouldBe[2] = new double[] { 6, -22, -2, -10, 12 };
             CShouldBe[3] = new double[] { -13, -1, -7, 6, -9 };
+
+            CTransposedShouldBe = new Matrix(5, 4);
+            CTransposedShouldBe[0] = new double[] { -16, 10, 6, -13 };
+            CTransposedShouldBe[1] = new double[] { -4, 18, -22, -1 };
+            CTransposedShouldBe[2] = new double[] { -29, 21, -2, -7 };
+            CTransposedShouldBe[3] = new double[] { 37, -17, -10, 6 };
+            CTransposedShouldBe[4] = new double[] { -46, 22, 12, -9 };
         }
     }
 }

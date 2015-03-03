@@ -19,6 +19,14 @@ namespace Matrix.Tests
             // test multiplication result
             MatrixMultiplicationResultTest.Multiply(a, b, cShouldBe);
 
+            // test transpoition
+            var c = a * b;
+            var cTransposedShouldBe = staticData.CTransposedShouldBe;
+            MatrixTranspositionTest.Transpose(c, cTransposedShouldBe);
+            // transpose c again to return it to original
+            var c2 = MatrixTranspositionTest.GetTransposedCopy(c);
+            MatrixTranspositionTest.TestEquality(c2, cShouldBe);
+
             // test indexing
             MatrixIndexerTest.GetViaIndex(a, 1, 0, -1);
             MatrixIndexerTest.SetViaIndex(a, 1, 0); // value only changed in local scope of test
@@ -32,12 +40,13 @@ namespace Matrix.Tests
             MatrixGetColsTest.GetSingleCol(a);
             MatrixGetColsTest.GetMultipleCols(a);
 
-            // try increasing dimentions (of square matricies) by powers of 2 to get approx formula for running time
+            // test multiplication run time - square matricies
             MatrixMultiplicationTimeTest.Multiply(128);
             MatrixMultiplicationTimeTest.Multiply(256);
             MatrixMultiplicationTimeTest.Multiply(512);
             //MatrixMultiplicationTimeTest.Multiply(1024);
-            //new MatrixMultiplicationTimeTest(10000); //3,136,656 ms (52 mins)
+            //MatrixMultiplicationTimeTest.Multiply(10000); //3,136,656 ms (52 mins)
+
             //MatrixMultiplicationTimeTest.Multiply(10000, 200, 200, 10000); // test none square array
 
             var secs = ((Double)watch.ElapsedMilliseconds)/1000;

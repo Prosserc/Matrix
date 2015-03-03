@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Tests\MatrixGetColsTest.cs" />
     <Compile Include="Tests\MatrixGetRowsTest.cs" />
+    <Compile Include="Tests\MatrixTranspositionTest.cs" />
     <Compile Include="Tests\TestRunner.cs" />
     <Compile Include="Tests\MatrixIndexerTest.cs" />
     <Compile Include="Tests\MatrixMultiplicationResultTest.cs" />
