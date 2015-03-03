@@ -15,7 +15,7 @@ namespace Matrix
             Debug.WriteLine(StretchText(fullMsg, padChar:padChar, padSize:padSize, convToUpper:convToUpper));
         }
 
-        public static string StretchText(string msg, char padChar = ' ', int padSize = 1, bool convToUpper=false)
+        public static string StretchText(string msg, char padChar = ' ', int padSize = 1, bool convToUpper = false)
         {
             var newText = "";
             for (var i = 0; i < msg.Length; i++)

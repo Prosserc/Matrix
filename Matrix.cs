@@ -16,9 +16,17 @@ namespace Matrix
         public int Cols { get; set; }
 
         // initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
-        public Matrix(double[][] values)
+        public Matrix(double[][] values, bool supressPopulation = true)
         {
-            PopulateMatrix(values);
+            if (supressPopulation)
+            {
+                _val = values;
+                SetRowAndColSize();
+            }
+            else
+            {
+                PopulateMatrix(values);
+            }
         }
 
         // alternative contructor specifying just rows, cols and options for intialisation
@@ -210,9 +218,15 @@ namespace Matrix
             return min;
         }
 
-        // changes ijk to ikj loop for performance optimisation
+        // changed ijk to ikj loop for performance optimisation
         public static Matrix DotProduct(Matrix a, Matrix b)
         {
+            // check dimentions
+            if (a.Cols != b.Rows)
+            {
+                throw new IncompatibleMatrixDimentionsException(IncompatibleMatrixDimentionsException.MatrixOperators.Multiply);
+            }
+
             // initialise result matrix
             var res = new Matrix(a.Rows, b.Cols);
 
@@ -248,11 +262,6 @@ namespace Matrix
         // allow for easy calculation of dot product of matricies e.g. A*B
         public static Matrix operator *(Matrix a, Matrix b)
         {
-            // check dimentions
-            if (a.Cols != b.Rows)
-            {
-                throw new IncompatibleMatrixDimentionsException(IncompatibleMatrixDimentionsException.MatrixOperators.Multiply);
-            }
             return DotProduct(a, b);
         }
 
