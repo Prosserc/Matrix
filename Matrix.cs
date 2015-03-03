@@ -7,7 +7,14 @@ namespace Matrix
     /// <summary>
     /// Allows indexing and operations such as * and == directly on matrix object
     /// </summary>
-    /// <remarks>Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)</remarks>
+    /// <remarks>
+    /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
+    /// TODO:
+    ///     inverse method;
+    ///     elementwise operations;
+    ///     identity matricies;
+    ///     consider other operations that may be useful for machine learning;
+    /// </remarks>
     public class Matrix
     {
         private double[][] _val;
@@ -274,7 +281,7 @@ namespace Matrix
             // check dimentions
             if (a.Cols != b.Rows)
             {
-                throw new IncompatibleMatrixDimentionsException(IncompatibleMatrixDimentionsException.MatrixOperators.Multiply);
+                throw new IncompatibleMatrixDimentionsException(MatrixOperators.Multiply);
             }
 
             // initialise result matrix
@@ -368,12 +375,48 @@ namespace Matrix
 
         public static Matrix operator +(Matrix a, Matrix b)
         {
-            throw new NotImplementedException();
+            // check dimentions
+            if (a.Cols != b.Cols || a.Rows != b.Rows)
+            {
+                throw new IncompatibleMatrixDimentionsException(MatrixOperators.Add);
+            }
+
+            // initialise result matrix
+            var res = new Matrix(a.Rows, b.Cols);
+
+            // TODO - test timings and look for performance optimisations
+            for (var i = 0; i < a.Rows; i++)
+            {
+                for (var j = 0; j < a.Cols; j++)
+                {
+                    res[i][j] = a[i][j] + b[i][j];
+                }
+            }
+
+                return res;
         }
 
         public static Matrix operator -(Matrix a, Matrix b)
         {
-            throw new NotImplementedException();
+            // check dimentions
+            if (a.Cols != b.Cols || a.Rows != b.Rows)
+            {
+                throw new IncompatibleMatrixDimentionsException(MatrixOperators.Minus);
+            }
+
+            // initialise result matrix
+            var res = new Matrix(a.Rows, b.Cols);
+
+            // TODO - test timings and look for performance optimisations
+            for (var i = 0; i < a.Rows; i++)
+            {
+                for (var j = 0; j < a.Cols; j++)
+                {
+                    res[i][j] = a[i][j] - b[i][j];
+                }
+            }
+
+            return res;
         }
 
         public override string ToString()

@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="IncompatibleMatrixDimentionsException.cs" />
     <Compile Include="Matrix.cs" />
+    <Compile Include="MatrixOperators.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
