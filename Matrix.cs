@@ -4,18 +4,21 @@ using System.Linq;
 
 namespace Matrix
 {
-    // ***********************************************************************************************
-    // allows indexing and operations directly on matrix object
-    // initially just work on getting basic functionality working, not yet optimised for performance
-    // ***********************************************************************************************
-
+    /// <summary>
+    /// Allows indexing and operations such as * and == directly on matrix object
+    /// </summary>
+    /// <remarks>Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)</remarks>
     public class Matrix
     {
         private double[][] _val;
         public int Rows { get; set; }
         public int Cols { get; set; }
 
-        // initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
+        /// <summary>
+        /// Constructor, creates Matrix object from jagged array.
+        /// </summary>
+        /// <param name="values">double[][] - jagged array can be empty or populated</param>
+        /// <param name="supressPopulation">optional bool - if set to false matrix elements will be initialised to defaut values</param>
         public Matrix(double[][] values, bool supressPopulation = true)
         {
             if (supressPopulation)
@@ -29,7 +32,13 @@ namespace Matrix
             }
         }
 
-        // alternative contructor specifying just rows, cols and options for intialisation
+        /// <summary>
+        /// Alternative contructor specifying just rows, cols and options for intialisation.
+        /// </summary>
+        /// <param name="rows">int - specifying number of rows</param>
+        /// <param name="cols">int - specifying number of columns</param>
+        /// <param name="initialiseWithRandomValues">optional bool - if set to true each element will be set to a random number between 0 and 1</param>
+        /// <param name="initialiseTo">optional int - only applies if initialiseWithRandomVariables is set to false, all elements will be set to this number</param> 
         public Matrix(int rows, int cols, bool initialiseWithRandomValues = false, int initialiseTo = 0)
         {
             if (initialiseWithRandomValues)
@@ -47,24 +56,23 @@ namespace Matrix
                 PopulateMatrix(_val);   
             }
         }
-
-        // allow creation of empty Matrix
-        public Matrix()
+        
+        private void CreateColumns(int rows, int cols)
         {
-            // was initially going too allow this, but hit issues when trying to assign new arrays to rows as rows have not been initialised
-            throw new NotImplementedException();
-        }
-
-        // using jagged array need to initialise each column
-        public void CreateColumns(int rows, int cols)
-        {
-            // create each col
+            // using jagged array need to initialise each column
             for (var i = 0; i < rows; i++)
             {
                 _val[i] = new double[cols];
             }
         }
 
+        /// <summary>
+        /// Populates a matrix object with set values or random values. ** Warning ** this will overwrite existing values.
+        /// </summary>
+        /// <param name="rows">int - specifying number of rows</param>
+        /// <param name="cols">int - specifying number of columns</param>
+        /// <param name="initialiseWithRandomValues">optional bool - if set to true each element will be set to a random number between 0 and 1</param>
+        /// <param name="initialiseTo">optional int - only applies if initialiseWithRandomVariables is set to false, all elements will be set to this number</param> 
         public void PopulateMatrix(int rows, int cols, bool initialiseWithRandomValues = false, double initialiseTo = 0)
         {
             _val = new double[rows][];
@@ -85,6 +93,10 @@ namespace Matrix
             SetRowAndColSize();
         }
 
+        /// <summary>
+        /// Overloaded method to populate the matrix with values provided or initialise matrix if an empty array is provided
+        /// </summary>
+        /// <param name="values">double[][] - jagged array of values to populate matrix with, defaults useed if empty</param>
         public void PopulateMatrix(double[][] values)
         {
             if (values == null || values.Length == 0)
@@ -118,7 +130,9 @@ namespace Matrix
             }
         }
 
-        // Transpose method
+        /// <summary>
+        /// Tranpose method - transposes the matrix so that the rows become the columns and vice versa.
+        /// </summary>
         public void T()
         {
             // initialise new double array with switched rows / cols
@@ -137,7 +151,10 @@ namespace Matrix
             SetRowAndColSize();
         }
 
-        // gets a Transposed copy of the matrix without changing the original
+        /// <summary>
+        /// Gets a Transposed copy of the matrix without changing the original.
+        /// </summary>
+        /// <returns>Matrix of double[orig.Cols][orig.Rows]</returns>
         public Matrix GetT()
         {
             double[][] _valCopy = _val.Select(s => s.ToArray()).ToArray();
@@ -146,7 +163,12 @@ namespace Matrix
             return x;
         }
 
-        // gets row(s) from the Matrix (index is zero based)
+        /// <summary>
+        /// Gets Rows from Matrix and returns a subset of the original. Note, any changes made to the subset are also reflected in the original matrix.
+        /// </summary>
+        /// <param name="indexFrom">int - zero based index, subset of matrix created from this row</param>
+        /// <param name="numRows">optional int - number of rows to return in subset</param>
+        /// <returns>Matrix of double[numRows][this.Cols]</returns>
         public Matrix GetRows(int indexFrom, int numRows)
         {
             var result = new double[numRows][];
@@ -158,7 +180,12 @@ namespace Matrix
             return new Matrix(result);
         }
 
-        // gets column(s) from the Matix (index is zero based)
+        /// <summary>
+        /// Gets Columns from Matrix and returns a subset of the original. Note, any changes made to the subset are also reflected in the original matrix.
+        /// </summary>
+        /// <param name="indexFrom">int - zero based index, subset of matrix created from this row</param>
+        /// <param name="numCols">optional int - number of columns to return in subset</param>
+        /// <returns>Matrix of double[this.Rows][numCols]</returns>
         public Matrix GetCols(int indexFrom, int numCols)
         {
             var result = new double[Rows][];
@@ -179,7 +206,9 @@ namespace Matrix
             return new Matrix(result);
         }
 
-        // use with GetRows / GetCols rather than implementint RowAverage / ColAverage
+        /// <summary>
+        /// Gets average value in Matrix, use with GetRows or GetCols to get the average for a subset
+        /// </summary>
         public double Average()
         {
             double sum = 0;
@@ -193,7 +222,9 @@ namespace Matrix
             return sum / (Rows * Cols);
         }
 
-        // use with GetRows / GetCols rather than implementint RowMax / ColMax
+        /// <summary>
+        /// Gets maximum value in Matrix, use with GetRows or GetCols to get the max for a subset
+        /// </summary>
         public double Max()
         {
             var max = -1 * (Math.Pow(2, 63) +1); // min unigned 64bit int
@@ -211,7 +242,9 @@ namespace Matrix
             return max;
         }
 
-        // use with GetRows / GetCols rather than implementint RowMax / ColMax
+        /// <summary>
+        /// Gets minimum value in Matrix, use with GetRows or GetCols to get the min for a subset
+        /// </summary>
         public double Min()
         {
             var min = (Math.Pow(2, 63) - 1); // max unsigned 64 bit int
@@ -229,7 +262,13 @@ namespace Matrix
             return min;
         }
 
-        // changed ijk to ikj loop for performance optimisation
+        /// <summary>
+        /// Gets the Dot Product from the multiplication of two matricies. Note: the number of columns in the first matrix must be equal to the number of rows in the second matrix.
+        /// </summary>
+        /// <param name="a">matrix - first matrix for multiplication</param>
+        /// <param name="b">matrix - seconf matrix for multiplication</param>
+        /// <remarks>Changed ijk to ikj loop for performance optimisation.</remarks>
+        /// <returns>Matrix of double[a.Rows][b.Cols]</returns>
         public static Matrix DotProduct(Matrix a, Matrix b)
         {
             // check dimentions
@@ -270,7 +309,7 @@ namespace Matrix
         // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 
-        // allow for easy calculation of dot product of matricies e.g. A*B
+        /// allow for easy calculation of dot product of matricies e.g. A*B
         public static Matrix operator *(Matrix a, Matrix b)
         {
             return DotProduct(a, b);

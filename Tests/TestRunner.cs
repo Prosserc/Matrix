@@ -18,7 +18,7 @@ namespace Matrix.Tests
 
             // test multiplication result
             MatrixMultiplicationResultTest.Multiply(a, b, cShouldBe);
-
+            
             // test transpoition
             var c = a * b;
             var cTransposedShouldBe = staticData.CTransposedShouldBe;
