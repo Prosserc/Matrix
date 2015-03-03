@@ -129,7 +129,6 @@ namespace Matrix
 
         // gets row(s) from the Matrix (index is zero based)
         public Matrix GetRows(int indexFrom, int numRows)
-        // *** consider whether changes to the values returned should result in changes to the Matrix - if not need to make copies? ***
         {
             var result = new double[numRows][];
                 
@@ -142,20 +141,23 @@ namespace Matrix
 
         // gets column(s) from the Matix (index is zero based)
         public Matrix GetCols(int indexFrom, int numCols)
-        // *** consider whether changes to the values returned should result in changes to the Matrix - if not need to make copies? ***
         {
-            throw new NotImplementedException();
-            //var result = new double[Rows][];
+            var result = new double[Rows][];
 
-            //for (var j = 0; j < numCols; j++)
-            //{
-            //    var tmpCol = _val.Select(row => row[indexFrom + j]);
-            //    for (var i = 0; i < Rows; i++)
-            //    {
-            //        result[i][j] = _val[i][indexFrom + j];
-            //    }
-            //}
-            //return new Matrix(result);
+            for (var j = 0; j < numCols; j++)
+            {
+                // TODO - may be a better way to do this using Linq
+                //var tmpCol = _val.Select(row => row[indexFrom + j]);
+                for (var i = 0; i < Rows; i++)
+                {
+                    if (j == 0)
+                    {
+                        result[i] = new double[numCols];
+                    }
+                    result[i][j] = _val[i][indexFrom + j];
+                }
+            }
+            return new Matrix(result);
         }
 
         // use with GetRows / GetCols rather than implementint RowAverage / ColAverage

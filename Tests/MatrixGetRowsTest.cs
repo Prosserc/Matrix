@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Matrix.Tests
 {
-    class MatrixGetRowsTest
+    static class MatrixGetRowsTest
     {
         public static void GetSingleRow(Matrix a, int rowIndex=0)
         {
@@ -32,7 +32,7 @@ namespace Matrix.Tests
             }
 
             Debug.WriteLine(string.Format("tmpMatrix now set to:{0}{1}", Environment.NewLine, subMatrix));
-            Debug.WriteLine(string.Format("original matrix set to:{0}{1}", Environment.NewLine, a));
+            Debug.WriteLine(string.Format("original matrix now set to:{0}{1}", Environment.NewLine, a));
 
             // check that indexed row in original matrix has been updated to reflect changes in subMatrix
             for (var i = 0; i < numRows; i++)

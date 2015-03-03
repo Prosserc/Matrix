@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Matrix.Tests
 {
-    class MatrixMultiplicationTimeTest
+    static class MatrixMultiplicationTimeTest
     {
         // shorthand for constructor with square matricies
         public static void Multiply(int squareMatrixDimentions)

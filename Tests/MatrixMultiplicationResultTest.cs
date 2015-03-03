@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Matrix.Tests
 {
-    class MatrixMultiplicationResultTest
+    static class MatrixMultiplicationResultTest
     {
         public static void Multiply(Matrix a, Matrix b, Matrix cShouldBe)
         {

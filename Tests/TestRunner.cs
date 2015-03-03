@@ -1,4 +1,6 @@
-﻿using Matrix.Tests.Data;
+﻿using System;
+using System.Diagnostics;
+using Matrix.Tests.Data;
 
 namespace Matrix.Tests
 {
@@ -6,6 +8,8 @@ namespace Matrix.Tests
     {   
         public TestRunner()
         {
+            var watch = Stopwatch.StartNew();
+
             // get static data for tests
             var staticData = new StaticData();
             var a = staticData.A;
@@ -25,16 +29,21 @@ namespace Matrix.Tests
             MatrixGetRowsTest.GetAndManipulateRowsToCheckThatChangesPersistInOriginalMatrix(a);
 
             //test getCols
-            //MatrixGetColsTest.GetSingleCol(a);
-            //MatrixGetColsTest.GetMultipleCols(a);
+            MatrixGetColsTest.GetSingleCol(a);
+            MatrixGetColsTest.GetMultipleCols(a);
 
             // try increasing dimentions (of square matricies) by powers of 2 to get approx formula for running time
             MatrixMultiplicationTimeTest.Multiply(128);
             MatrixMultiplicationTimeTest.Multiply(256);
             MatrixMultiplicationTimeTest.Multiply(512);
-            MatrixMultiplicationTimeTest.Multiply(1024);
+            //MatrixMultiplicationTimeTest.Multiply(1024);
             //new MatrixMultiplicationTimeTest(10000); //3,136,656 ms (52 mins)
             //MatrixMultiplicationTimeTest.Multiply(10000, 200, 200, 10000); // test none square array
+
+            var secs = ((Double)watch.ElapsedMilliseconds)/1000;
+            watch.Stop();
+            var msg = String.Format("Test suite took {0:0.###} seconds to run", secs);
+            Utils.PrintTitle(msg);
         }
     }
 }

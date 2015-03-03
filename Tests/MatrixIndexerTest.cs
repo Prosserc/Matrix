@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Matrix.Tests
 {
-    class MatrixIndexerTest
+    static class MatrixIndexerTest
     {
         public static void GetViaIndex(Matrix a, int rowIndex=0, int colIndex=0, double valShouldBe=0)
         {
