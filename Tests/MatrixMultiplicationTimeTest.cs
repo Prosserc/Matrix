@@ -5,13 +5,8 @@ namespace Matrix.Tests
 {
     class MatrixMultiplicationTimeTest
     {
-        public MatrixMultiplicationTimeTest(int m1Rows, int m1Cols, int m2Rows, int m2Cols)
-        {
-            Multiply(m1Rows, m1Cols, m2Rows, m2Cols);
-        }
-
         // shorthand for constructor with square matricies
-        public MatrixMultiplicationTimeTest(int squareMatrixDimentions)
+        public static void Multiply(int squareMatrixDimentions)
         {
             Multiply(squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions);
         }

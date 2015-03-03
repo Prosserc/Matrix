@@ -5,13 +5,8 @@ namespace Matrix.Tests
 {
     class MatrixMultiplicationResultTest
     {
-        public MatrixMultiplicationResultTest()
+        public static void Multiply(Matrix a, Matrix b, Matrix cShouldBe)
         {
-            // get static data for test
-            var staticData = new StaticData();
-            var a = staticData.A;
-            var b = staticData.B;
-            var cShouldBe = staticData.CShouldBe;
 
             Debug.WriteLine(string.Format("Matrix a set to: {0}{1}", Environment.NewLine, a));
             Debug.WriteLine(string.Format("Matrix b set to: {0}{1}", Environment.NewLine, b));
