@@ -20,7 +20,7 @@ namespace Matrix
         private double[][] _val;
         public int Rows { get; set; }
         public int Cols { get; set; }
-
+        
         /// <summary>
         /// Constructor, creates Matrix object from jagged array.
         /// </summary>
@@ -94,7 +94,7 @@ namespace Matrix
             }
             else
             {
-                InitialiseMatrix(defaultVal:initialiseTo);
+                InitialiseMatrix(defaultVal:initialiseTo, randInit:false);
             }
             
             SetRowAndColSize();
@@ -138,9 +138,17 @@ namespace Matrix
         }
 
         /// <summary>
-        /// Tranpose method - transposes the matrix so that the rows become the columns and vice versa.
+        /// Transpose method - transposes the matrix so that the rows become the columns and vice versa. (Shorthand entry point).
         /// </summary>
         public void T()
+        {
+            Transpose();
+        }
+
+        /// <summary>
+        /// Tranpose method - transposes the matrix so that the rows become the columns and vice versa.
+        /// </summary>
+        public void Transpose()
         {
             // initialise new double array with switched rows / cols
             var _newVal = new double[Cols][];
@@ -159,14 +167,23 @@ namespace Matrix
         }
 
         /// <summary>
-        /// Gets a Transposed copy of the matrix without changing the original.
+        /// Gets a Transposed copy of the matrix without changing the original. (Shorthand entry point).
         /// </summary>
         /// <returns>Matrix of double[orig.Cols][orig.Rows]</returns>
         public Matrix GetT()
         {
+            return GetTransposedCopy();
+        }
+
+        /// <summary>
+        /// Gets a Transposed copy of the matrix without changing the original.
+        /// </summary>
+        /// <returns>Matrix of double[orig.Cols][orig.Rows]</returns>
+        public Matrix GetTransposedCopy()
+        {
             double[][] _valCopy = _val.Select(s => s.ToArray()).ToArray();
             var x = new Matrix(_valCopy);
-            x.T();
+            x.Transpose();
             return x;
         }
 

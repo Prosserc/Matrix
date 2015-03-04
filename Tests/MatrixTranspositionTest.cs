@@ -7,14 +7,14 @@ namespace Matrix.Tests
     {
         public static void Transpose(Matrix m, Matrix mTransposedShouldBe)
         {
-            m.T();
+            m.Transpose();
             Debug.WriteLine(string.Format("Result of Transposition on Matrix c: {0}{1}", Environment.NewLine, m));
             Debug.Assert(m.Equals(mTransposedShouldBe));
         }
 
         public static Matrix GetTransposedCopy(Matrix m)
         {
-            var mTranposedCopy = m.GetT();
+            var mTranposedCopy = m.GetTransposedCopy();
             return mTranposedCopy;
         }
 
