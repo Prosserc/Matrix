@@ -63,21 +63,22 @@
   <ItemGroup>
     <Compile Include="IncompatibleMatrixDimentionsException.cs" />
     <Compile Include="Matrix.cs" />
-    <Compile Include="MatrixOperators.cs" />
+    <Compile Include="RefData\MatrixOperators.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tests\MatrixGetColsTest.cs" />
-    <Compile Include="Tests\MatrixGetRowsTest.cs" />
-    <Compile Include="Tests\MatrixTranspositionTest.cs" />
+    <Compile Include="Tests\Functional\MatrixGetColsTest.cs" />
+    <Compile Include="Tests\Functional\MatrixGetRowsTest.cs" />
+    <Compile Include="Tests\Timing\MatrixTranpositionTimeTest.cs" />
+    <Compile Include="Tests\Functional\MatrixTranspositionTest.cs" />
     <Compile Include="Tests\TestRunner.cs" />
-    <Compile Include="Tests\MatrixIndexerTest.cs" />
-    <Compile Include="Tests\MatrixMultiplicationResultTest.cs" />
+    <Compile Include="Tests\Functional\MatrixIndexerTest.cs" />
+    <Compile Include="Tests\Functional\MatrixMultiplicationTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\MatrixMultiplicationTimeTest.cs" />
+    <Compile Include="Tests\Timing\MatrixMultiplicationTimeTest.cs" />
     <Compile Include="Tests\Data\StaticData.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Matrix.Tests
+namespace Matrix.Tests.Functional
 {
-    static class MatrixMultiplicationResultTest
+    static class MatrixMultiplicationTest
     {
         public static void Multiply(Matrix a, Matrix b, Matrix cShouldBe)
         {

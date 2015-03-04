@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace Matrix.Tests
+namespace Matrix.Tests.Functional
 {
     static class MatrixIndexerTest
     {

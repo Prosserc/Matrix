@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using Matrix.Tests.Data;
+using Matrix.Tests.Functional;
+using Matrix.Tests.Timing;
 
 namespace Matrix.Tests
 {
@@ -17,7 +19,7 @@ namespace Matrix.Tests
             var cShouldBe = staticData.CShouldBe;
 
             // test multiplication result
-            MatrixMultiplicationResultTest.Multiply(a, b, cShouldBe);
+            MatrixMultiplicationTest.Multiply(a, b, cShouldBe);
             
             // test transpoition
             var c = a * b;
@@ -28,8 +30,8 @@ namespace Matrix.Tests
             MatrixTranspositionTest.TestEquality(c2, cShouldBe);
 
             // test indexing
-            MatrixIndexerTest.GetViaIndex(a, 1, 0, -1);
-            MatrixIndexerTest.SetViaIndex(a, 1, 0); // value only changed in local scope of test
+            MatrixIndexerTest.GetViaIndex(a, 1, 1, -4); // set value manually here as no point in using indexed lookup to test the indexing
+            MatrixIndexerTest.SetViaIndex(a, 1, 1); // value only changed in local scope of test
 
             // test getRows
             MatrixGetRowsTest.GetSingleRow(a);
@@ -48,6 +50,13 @@ namespace Matrix.Tests
             //MatrixMultiplicationTimeTest.Multiply(10000); //3,136,656 ms (52 mins)
 
             //MatrixMultiplicationTimeTest.Multiply(10000, 200, 200, 10000); // test none square array
+
+            // test transposition run time
+            MatrixTranpositionTimeTest.Transpose(256, 256);
+            MatrixTranpositionTimeTest.Transpose(512, 512);
+            MatrixTranpositionTimeTest.Transpose(1024, 1024);
+            MatrixTranpositionTimeTest.Transpose(200, 10000);
+            MatrixTranpositionTimeTest.Transpose(10000, 200);
 
             var secs = ((Double)watch.ElapsedMilliseconds)/1000;
             watch.Stop();

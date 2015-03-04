@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using Matrix.RefData;
 
 namespace Matrix
 {
     /// <summary>
-    /// Allows indexing and operations such as * and == directly on matrix object
+    /// Allows indexing and operations such as * + - and == directly on matrix object
     /// </summary>
     /// <remarks>
     /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
     /// TODO:
+    ///     test +/- operators;
+    ///     timing tests for large +/-/==/!= operators and transpose method?;
+    ///         - if reqd performance optimisation for any of above;
     ///     inverse method;
     ///     elementwise operations;
     ///     identity matricies;
+    ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;
     /// </remarks>
     public class Matrix

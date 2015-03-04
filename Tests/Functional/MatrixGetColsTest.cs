@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Matrix.Tests
+namespace Matrix.Tests.Functional
 {
     static class MatrixGetColsTest
     {
