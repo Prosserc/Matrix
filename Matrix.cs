@@ -16,7 +16,7 @@ namespace Matrix
     ///         - if reqd performance optimisation for any of above;
     ///     inverse method;
     ///     elementwise operations;
-    ///     identity matricies;
+    ///     identity Matrices;
     ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;
     /// </remarks>
@@ -292,7 +292,7 @@ namespace Matrix
         }
 
         /// <summary>
-        /// Gets the Dot Product from the multiplication of two matricies. Note: the number of columns in the first matrix must be equal to the number of rows in the second matrix.
+        /// Gets the Dot Product from the multiplication of two Matrices. Note: the number of columns in the first matrix must be equal to the number of rows in the second matrix.
         /// </summary>
         /// <param name="a">matrix - first matrix for multiplication</param>
         /// <param name="b">matrix - seconf matrix for multiplication</param>
@@ -338,7 +338,7 @@ namespace Matrix
         // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 
-        /// allow for easy calculation of dot product of matricies e.g. A*B
+        /// allow for easy calculation of dot product of Matrices e.g. A*B
         public static Matrix operator *(Matrix a, Matrix b)
         {
             return DotProduct(a, b);
@@ -357,6 +357,7 @@ namespace Matrix
         {
             try
             {
+                if (a.Rows != b.Rows || a.Cols != b.Cols) return false;
                 for (var n = 0; n < a.Rows; n++)
                 {
                     for (var m = 0; m < a.Cols; m ++)
@@ -378,11 +379,12 @@ namespace Matrix
         {
             try
             {
+                if (a.Rows != b.Rows || a.Cols != b.Cols) return true;
                 for (var n = 0; n < a.Rows; n++)
                 {
                     for (var m = 0; m < a.Cols; m++)
                     {
-                        // loop over rows/ cols if any different return true (i.e. true that the matricies are not equal)
+                        // loop over rows/ cols if any different return true (i.e. true that the Matrices are not equal)
                         if ((a[n][m] != b[n][m])) return true;
                     }
                 }

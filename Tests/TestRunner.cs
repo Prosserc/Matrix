@@ -42,14 +42,15 @@ namespace Matrix.Tests
             MatrixGetColsTest.GetSingleCol(a);
             MatrixGetColsTest.GetMultipleCols(a);
 
-            // test multiplication run time - square matricies
+            // test multiplication run time - square Matrices
             MatrixMultiplicationTimeTest.Multiply(128);
             MatrixMultiplicationTimeTest.Multiply(256);
             MatrixMultiplicationTimeTest.Multiply(512);
             //MatrixMultiplicationTimeTest.Multiply(1024);
             //MatrixMultiplicationTimeTest.Multiply(10000); //3,136,656 ms (52 mins)
 
-            //MatrixMultiplicationTimeTest.Multiply(10000, 200, 200, 10000); // test none square array
+            // test none square array
+            MatrixMultiplicationTimeTest.Multiply(1000, 20, 20, 1000); 
 
             // test transposition run time
             MatrixTranpositionTimeTest.Transpose(256, 256);
