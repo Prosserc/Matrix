@@ -142,6 +142,12 @@ namespace Matrix
             }
         }
 
+        /// <summary>Get deep copy of Matrix</summary>
+        public Matrix Copy()
+        {
+            return new Matrix(_val.Select(s => s.ToArray()).ToArray());
+        }
+
         /// <summary>
         /// Transpose method - transposes the matrix so that the rows become the columns and vice versa. (Shorthand entry point).
         /// </summary>
@@ -186,8 +192,7 @@ namespace Matrix
         /// <returns>Matrix of double[orig.Cols][orig.Rows]</returns>
         public Matrix GetTransposedCopy()
         {
-            double[][] _valCopy = _val.Select(s => s.ToArray()).ToArray();
-            var x = new Matrix(_valCopy);
+            var x = Copy();
             x.Transpose();
             return x;
         }

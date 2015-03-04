@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Matrix.Tests.Timing
 {
-    class MatrixTranpositionTimeTest
+    static class MatrixTranpositionTimeTest
     {
         /// <summary>Timed test of transpose method.</summary>
         /// <param name="x">matrix - takes maxtrix to be transposed</param>
@@ -16,7 +16,7 @@ namespace Matrix.Tests.Timing
             watch.Stop();
 
             // report results
-            Debug.WriteLine(string.Format("{0}*** Transposition took {1} ms on {2} x {3} Matrix ***", Environment.NewLine, ms, x.Rows, x.Cols));
+            Debug.WriteLine(string.Format("*** Transposition took {0} ms on {1} x {2} Matrix ***",  ms, x.Rows, x.Cols));
         }
 
         /// <summary>Alternative constructor which generates the matrix to be run through the timed test and initalises it with random numbers</summary>

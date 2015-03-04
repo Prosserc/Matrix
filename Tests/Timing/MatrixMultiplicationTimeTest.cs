@@ -26,7 +26,7 @@ namespace Matrix.Tests.Timing
             watch.Stop();
 
             // report results
-            var msg = string.Format("Multiplication took {0} ms on {1}x{2} and {3}x{4} Matrices. Result:", ms, m1Rows, m1Cols, m2Rows, m2Cols);
+            var msg = string.Format("Multiplication took {0} ms on {1} x {2} and {3} x {4} Matrices. Result:", ms, m1Rows, m1Cols, m2Rows, m2Cols);
             Debug.WriteLine("{0}{1}{2}{3}{4}", msg, Environment.NewLine, new string('-', msg.Length-1), Environment.NewLine, m3);
         }
     }

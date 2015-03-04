@@ -73,6 +73,9 @@
     <Compile Include="Tests\Functional\MatrixGetColsTest.cs" />
     <Compile Include="Tests\Functional\MatrixGetRowsTest.cs" />
     <Compile Include="Tests\Functional\MatrixSubtractionTest.cs" />
+    <Compile Include="Tests\Timing\MatrixAdditionTimeTest.cs" />
+    <Compile Include="Tests\Timing\MatrixEqualityTimeTest.cs" />
+    <Compile Include="Tests\Timing\MatrixSubtractionTimeTest.cs" />
     <Compile Include="Tests\Timing\MatrixTranpositionTimeTest.cs" />
     <Compile Include="Tests\Functional\MatrixTranspositionTest.cs" />
     <Compile Include="Tests\TestRunner.cs" />
