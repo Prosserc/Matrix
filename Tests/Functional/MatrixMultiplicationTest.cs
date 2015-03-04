@@ -10,7 +10,7 @@ namespace Matrix.Tests.Functional
             Debug.WriteLine(string.Format("Matrix a set to: {0}{1}", Environment.NewLine, a));
             Debug.WriteLine(string.Format("Matrix b set to: {0}{1}", Environment.NewLine, b));
 
-            // * opperator has override to get dot product
+            // * operator has override to get dot product
             var c = a * b;
             Debug.WriteLine(string.Format("Result of dot product (Matrix c) set to: {0}{1}", Environment.NewLine, c));
 

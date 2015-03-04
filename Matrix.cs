@@ -11,11 +11,11 @@ namespace Matrix
     /// <remarks>
     /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
     /// TODO:
-    ///     test +/- operators;
-    ///     timing tests for large +/-/==/!= operators and transpose method?;
+    ///     timing tests for large +/-/==/!= operators;
     ///         - if reqd performance optimisation for any of above;
     ///     inverse method;
     ///     elementwise operations;
+    ///         - consider multiplication with numbers e.g. matrix * 2
     ///     identity Matrices;
     ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;

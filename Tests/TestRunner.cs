@@ -16,10 +16,20 @@ namespace Matrix.Tests
             var staticData = new StaticData();
             var a = staticData.A;
             var b = staticData.B;
-            var cShouldBe = staticData.CShouldBe;
+            var cShouldBe = staticData.ATimesBShouldBe;
 
             // test multiplication result
             MatrixMultiplicationTest.Multiply(a, b, cShouldBe);
+
+            // test addition result
+            var d = staticData.D;
+            var e = staticData.E;
+            var fShouldBe = staticData.DPlusEShouldBe;
+            MatrixAdditionTest.Add(d, e, fShouldBe);
+
+            // test subtraction result
+            var gShouldBe = staticData.DMinusEShouldBe;
+            MatrixSubtractionTest.Subtract(d, e, gShouldBe);
             
             // test transpoition
             var c = a * b;

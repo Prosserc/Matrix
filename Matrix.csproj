@@ -69,8 +69,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tests\Functional\MatrixAdditionTest.cs" />
     <Compile Include="Tests\Functional\MatrixGetColsTest.cs" />
     <Compile Include="Tests\Functional\MatrixGetRowsTest.cs" />
+    <Compile Include="Tests\Functional\MatrixSubtractionTest.cs" />
     <Compile Include="Tests\Timing\MatrixTranpositionTimeTest.cs" />
     <Compile Include="Tests\Functional\MatrixTranspositionTest.cs" />
     <Compile Include="Tests\TestRunner.cs" />
