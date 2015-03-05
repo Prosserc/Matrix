@@ -1,5 +1,5 @@
-﻿using Matrix.RefData;
-using Matrix.Utils;
+﻿using Matrix.Tests;
+using Matrix.Tests.Utils;
 using System;
 using System.Diagnostics;
 
@@ -19,8 +19,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Transposition", string.Format("{0} x {1}", x.Rows, x.Cols), ms.ToString() }, 
-                           new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Right });
+                tab.AddRow( new string[] { "Transposition", StringUtils.FormatDimentions(x.Rows, x.Cols), null, ms.ToString("#,###") } );
         }
 
         /// <summary>Alternative constructor which generates the matrix to be run through the timed test and initalises it with random numbers</summary>

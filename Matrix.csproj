@@ -63,7 +63,7 @@
   <ItemGroup>
     <Compile Include="IncompatibleMatrixDimentionsException.cs" />
     <Compile Include="Matrix.cs" />
-    <Compile Include="RefData\Alignment.cs" />
+    <Compile Include="Tests\Utils\Alignment.cs" />
     <Compile Include="RefData\MatrixOperators.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -86,8 +86,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Timing\MatrixMultiplicationTimeTest.cs" />
     <Compile Include="Tests\Data\StaticData.cs" />
-    <Compile Include="Utils\TablePrinter.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Tests\Utils\TablePrinter.cs" />
+    <Compile Include="Tests\Utils\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

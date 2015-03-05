@@ -1,5 +1,5 @@
-﻿using Matrix.RefData;
-using Matrix.Utils;
+﻿using Matrix.Tests;
+using Matrix.Tests.Utils;
 using System;
 using System.Diagnostics;
 
@@ -28,8 +28,10 @@ namespace Matrix.Tests.Timing
             watch.Stop();
 
             // report results
-            tab.AddRow(new string[] { "Multiplication", string.Format("{0} x {1} and {2} x {3}", m1Rows, m1Cols, m2Rows, m2Cols), ms.ToString() }, 
-                       new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Right });
+            if (tab != null)
+                tab.AddRow(new string[] { "Multiplication", StringUtils.FormatDimentions(m1Rows, m1Cols), 
+                                          StringUtils.FormatDimentions(m2Rows, m2Cols), ms.ToString("#,###") });
+            
             var msg = string.Format("Multiplication took {0} ms on {1} x {2} and {3} x {4} Matrices. Result:", ms, m1Rows, m1Cols, m2Rows, m2Cols);
             Debug.WriteLine("{0}{1}{2}{3}{4}", msg, Environment.NewLine, new string('-', msg.Length-1), Environment.NewLine, m3);
         }

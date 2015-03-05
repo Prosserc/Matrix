@@ -1,11 +1,3 @@
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.exe.config
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.exe
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.pdb
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.exe
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.pdb
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.Properties.Resources.resources
-C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\bin\Debug\Matrix.exe.config
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\bin\Debug\Matrix.exe
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\bin\Debug\Matrix.pdb
@@ -14,3 +6,11 @@ C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\obj\Debug\Matrix.
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\obj\Debug\Matrix.exe
 C:\Users\Chris\Dropbox\Docs\Visual Studio 2013\Projects\Matrix\obj\Debug\Matrix.pdb
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.exe.config
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.exe
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\bin\Debug\Matrix.pdb
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.Properties.Resources.resources
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.exe
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.pdb
+C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache

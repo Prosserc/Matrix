@@ -1,5 +1,6 @@
-﻿using Matrix.RefData;
-using Matrix.Utils;
+﻿using System.Globalization;
+using Matrix.Tests;
+using Matrix.Tests.Utils;
 using System;
 using System.Diagnostics;
 
@@ -27,8 +28,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Subtraction", string.Format("{0} x {1}", rows, cols), ms.ToString() },
-                           new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Right });
+                tab.AddRow(new string[] { "Subtraction", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
         }
     }
 }

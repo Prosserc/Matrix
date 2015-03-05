@@ -1,8 +1,8 @@
-﻿namespace Matrix.RefData
+﻿namespace Matrix.Tests.Utils
 {
     public enum Alignment
     {
-        //Central,
+        Centre,
         Left,
         Right
     }

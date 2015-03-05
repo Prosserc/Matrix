@@ -1,4 +1,4 @@
-﻿namespace Matrix.RefData
+﻿namespace Matrix.Tests
 {
     public enum MatrixOperators
     {

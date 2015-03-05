@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using Matrix.Tests;
 using Matrix.Tests.Data;
 using Matrix.Tests.Functional;
 using Matrix.Tests.Timing;
-using Matrix.Utils;
+using Matrix.Tests.Utils;
 
 namespace Matrix.Tests
 {
@@ -54,14 +55,17 @@ namespace Matrix.Tests
             MatrixGetColsTest.GetMultipleCols(a);
 
 
-
-            var tab = new TablePrinter(new string[] { "Operation", "Dimentions", "Run Time (ms)" }, 25);
+            var tab = new TablePrinter(new string[] { "Operation", "Dimentions 1", "Dimentions 2", "Run Time (ms)" }, 16,
+                                       new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Left, Alignment.Right },
+                                       new Alignment[] { Alignment.Centre, Alignment.Centre, Alignment.Centre, Alignment.Centre} );
 
             // test multiplication run time
             MatrixMultiplicationTimeTest.Multiply(1000, 20, 20, 1000, tab);
+            MatrixMultiplicationTimeTest.Multiply(20, 1000, 1000, 20, tab);
             MatrixMultiplicationTimeTest.Multiply(128, tab);
             MatrixMultiplicationTimeTest.Multiply(256, tab);
             MatrixMultiplicationTimeTest.Multiply(512, tab);
+            tab.AddVerticalBoundaryRow();
 
             // test transposition run time
             MatrixTranpositionTimeTest.Transpose(256, 256, tab);
@@ -69,6 +73,7 @@ namespace Matrix.Tests
             MatrixTranpositionTimeTest.Transpose(1024, 1024, tab);
             MatrixTranpositionTimeTest.Transpose(200, 10000, tab);
             MatrixTranpositionTimeTest.Transpose(10000, 200, tab);
+            tab.AddVerticalBoundaryRow();
 
             // test addition run time
             MatrixAdditionTimeTest.Add(256, tab);
@@ -76,12 +81,14 @@ namespace Matrix.Tests
             MatrixAdditionTimeTest.Add(1024, tab);
             MatrixAdditionTimeTest.Add(500, 5000, tab);
             //MatrixAdditionTimeTest.Add(10000); // ~2.9 secs on home Laptop (see improvement after parallelisation
+            tab.AddVerticalBoundaryRow();
 
             // test subtraction run time
             MatrixSubtractionTimeTest.Subtract(256, tab);
             MatrixSubtractionTimeTest.Subtract(512, tab);
             MatrixSubtractionTimeTest.Subtract(1024, tab);
             MatrixSubtractionTimeTest.Subtract(500, 5000, tab);
+            tab.AddVerticalBoundaryRow();
 
             // test subtraction run time
             MatrixEqualityTimeTest.CheckEquality(256, tab);

@@ -1,5 +1,5 @@
-﻿using Matrix.RefData;
-using Matrix.Utils;
+﻿using Matrix.Tests;
+using Matrix.Tests.Utils;
 using System;
 using System.Diagnostics;
 
@@ -9,6 +9,7 @@ namespace Matrix.Tests.Timing
     {
         /// <summary>CheckEquality represents worst case time scenario as the values are equal (the method short circuits as soon as an inequality is found).</summary>
         /// <param name="squareMatrixDimentions">int - number of rows / columns in each square matrix</param>
+        /// <param name="tab">optional tablePrinter - row will be added to tablePrinter if passed in</param>
         public static void CheckEquality(int squareMatrixDimentions, TablePrinter tab = null)
         {
             CheckEquality(squareMatrixDimentions, squareMatrixDimentions, tab);
@@ -17,6 +18,7 @@ namespace Matrix.Tests.Timing
         /// <summary>CheckEquality represents worst case time scenario as the values are equal (the method short circuits as soon as an inequality is found).</summary>
         /// <param name="rows">int - number of rows in each matrix</param>
         /// <param name="cols">int - number of columns in each matrix</param>
+        /// <param name="tab">optional tablePrinter - row will be added to tablePrinter if passed in</param>
         /// <remarks>Speed of equality check for unequal matricies would depend on how early the first difference occurs</remarks>
         public static void CheckEquality(int rows, int cols, TablePrinter tab = null)
         {
@@ -32,8 +34,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Equality check", string.Format("{0} x {1}", rows, cols), ms.ToString() }, 
-                           new Alignment[] {Alignment.Left, Alignment.Left, Alignment.Right});
+                tab.AddRow(new string[] { "Equality check", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
         }
     }
 }

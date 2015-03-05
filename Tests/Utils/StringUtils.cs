@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Matrix.Utils
+namespace Matrix.Tests.Utils
 {
     static class StringUtils
     {
+        [Conditional("DEBUG")]
         public static void PrintTitle(string msg, char borderChar = '*', int width = 145, char padChar = ' ', int padSize = 1, bool convToUpper = true)
         {
             var nl = Environment.NewLine;
@@ -24,6 +25,11 @@ namespace Matrix.Utils
             }
 
             return convToUpper ? newText.ToUpper() : newText;
+        }
+
+        public static string FormatDimentions(int rows, int cols, int padLength = 6)
+        {
+            return string.Format("{0:#,###}", rows).PadLeft(padLength) + " x " + string.Format("{0:#,###}", cols).PadLeft(padLength);
         }
     }
 }
