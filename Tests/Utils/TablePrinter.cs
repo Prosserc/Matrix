@@ -10,11 +10,11 @@ namespace Matrix.Tests.Utils
         private int[] _colWidths;
         private Alignment[] _colAlignments;
         private Queue<string> _rows;
-        private const char RowBoundary = '-';
-        private const string ColBoundary = "  |  ";
-        private const string RowColBoundary = "--+--";
+        private const char RowBoundary = '-'; // e.g. '-'
+        private const string ColBoundary = "     "; // e.g. "  |  "
+        private const string RowColBoundary = "-----"; // e.g. "--+--"
         private const Alignment DefaultAlignment = Alignment.Left;
-        private const bool CentreOnPage = true;
+        private const bool CentreOnPage = false;
         private const int RowWidth = 145;
 
         /// <summary>Object to capture tabular data and output to the debug console.</summary>
