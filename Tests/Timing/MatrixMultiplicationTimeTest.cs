@@ -29,7 +29,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Multiplication", StringUtils.FormatDimentions(m1Rows, m1Cols), 
+                tab.AddRow(new[] { "Multiplication", StringUtils.FormatDimentions(m1Rows, m1Cols), 
                                           StringUtils.FormatDimentions(m2Rows, m2Cols), ms.ToString("#,###") });
             
             var msg = string.Format("Multiplication took {0} ms on {1} x {2} and {3} x {4} Matrices. Result:", ms, m1Rows, m1Cols, m2Rows, m2Cols);

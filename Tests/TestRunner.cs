@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Matrix.Tests;
 using Matrix.Tests.Data;
 using Matrix.Tests.Functional;
 using Matrix.Tests.Timing;
@@ -55,9 +54,10 @@ namespace Matrix.Tests
             MatrixGetColsTest.GetMultipleCols(a);
 
 
-            var tab = new TablePrinter(new string[] { "Operation", "Dimentions 1", "Dimentions 2", "Run Time (ms)" }, 16,
-                                       new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Left, Alignment.Right },
-                                       new Alignment[] { Alignment.Centre, Alignment.Centre, Alignment.Centre, Alignment.Centre} );
+            var tab = new TablePrinter(new[] { "Operation", "Dimentions 1", "Dimentions 2", "Run Time (ms)" }, 
+                                       new[] { 16, 16, 16, 13 },
+                                       new[] { Alignment.Left, Alignment.Left, Alignment.Left, Alignment.Right },
+                                       new[] { Alignment.Centre, Alignment.Centre, Alignment.Centre, Alignment.Centre} );
 
             // test multiplication run time
             MatrixMultiplicationTimeTest.Multiply(1000, 20, 20, 1000, tab);

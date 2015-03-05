@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Matrix.Tests;
@@ -23,8 +24,11 @@ namespace Matrix
     public class Matrix
     {
         private double[][] _val;
-        public int Rows { get; set; }
-        public int Cols { get; set; }
+        public int Rows { get; private set; }
+        public int Cols { get; private set; }
+
+        /// <summary>Defines margin of error allowed to consider matrix elements equal - allowing for floating point precision errors.</summary>
+        public const double EPSILON = 0.000001;
         
         /// <summary>
         /// Constructor, creates Matrix object from jagged array.
@@ -55,7 +59,7 @@ namespace Matrix
         {
             if (initialiseWithRandomValues)
             {
-                PopulateMatrix(rows, cols, initialiseWithRandomValues: initialiseWithRandomValues);
+                PopulateMatrix(rows, cols, initialiseWithRandomValues: true);
             }
             else if (initialiseTo != 0)
             {
@@ -95,7 +99,7 @@ namespace Matrix
 
             if (initialiseWithRandomValues)
             {
-                InitialiseMatrix(randInit: initialiseWithRandomValues);
+                InitialiseMatrix(randInit: true);
             }
             else
             {
@@ -162,18 +166,18 @@ namespace Matrix
         public void Transpose()
         {
             // initialise new double array with switched rows / cols
-            var _newVal = new double[Cols][];
+            var newVal = new double[Cols][];
             for (var i = 0; i < Cols; i++)
             {
-                _newVal[i] = new double[Rows];
+                newVal[i] = new double[Rows];
                 
                 // populate row of transposed array
                 for (var j = 0; j < Rows; j++ )
                 {
-                    _newVal[i][j] = _val[j][i];
+                    newVal[i][j] = _val[j][i];
                 }
             }
-            _val = _newVal;
+            _val = newVal;
             SetRowAndColSize();
         }
 
@@ -318,7 +322,7 @@ namespace Matrix
             var source = Enumerable.Range(0, a.Rows);
             var query = from num in source.AsParallel()
                         select num;
-            query.ForAll((i) => DotProductRowParallel(a, b, res, i));
+            query.ForAll(i => DotProductRowParallel(a, b, res, i));
             return res;
         }
 
@@ -358,48 +362,38 @@ namespace Matrix
         }
 
         // allow for comparisons directly on matrix so you don't have to do matrix.Val
+        // TODO - allow for null Matrices?
         public static bool operator ==(Matrix a, Matrix b)
         {
-            try
+            if (a.Rows != b.Rows || a.Cols != b.Cols) return false;
+
+            for (var n = 0; n < a.Rows; n++)
             {
-                if (a.Rows != b.Rows || a.Cols != b.Cols) return false;
-                for (var n = 0; n < a.Rows; n++)
+                for (var m = 0; m < a.Cols; m ++)
                 {
-                    for (var m = 0; m < a.Cols; m ++)
-                    {
-                        // loop over rows / cols, if any different return false
-                        if ((a[n][m] != b[n][m])) return false;
-                    }
+                    // loop over rows / cols, if any different return false
+                    // used comparison with EPSILON rather than "a[n][m] == b[n][m]" to avoid floating point precision errors
+                    if ((Math.Abs(a[n][m] - b[n][m]) > EPSILON)) return false;
                 }
-                return true;
             }
-            catch (NullReferenceException e)
-            {
-                // return true if both null i.e. they match, false otherwise as one is null and other isn't
-                return a._val == null && b._val == null;
-            }
+            return true;
         }
 
+        // TODO - allow for null Matrices?
         public static bool operator !=(Matrix a, Matrix b)
         {
-            try
+            if (a.Rows != b.Rows || a.Cols != b.Cols) return true;
+
+            for (var n = 0; n < a.Rows; n++)
             {
-                if (a.Rows != b.Rows || a.Cols != b.Cols) return true;
-                for (var n = 0; n < a.Rows; n++)
+                for (var m = 0; m < a.Cols; m++)
                 {
-                    for (var m = 0; m < a.Cols; m++)
-                    {
-                        // loop over rows/ cols if any different return true (i.e. true that the Matrices are not equal)
-                        if ((a[n][m] != b[n][m])) return true;
-                    }
+                    // loop over rows/ cols if any different return true (i.e. true that the Matrices are not equal)
+                    if ((Math.Abs(a[n][m] - b[n][m]) > EPSILON)) return true;
                 }
-                return false;
             }
-            catch (NullReferenceException e)
-            {
-                // return true (i.e. they do not match) if one and only one is null (XOR)
-                return a._val == null ^ b._val == null;
-            }
+            return false;
+            
         }
 
         public static Matrix operator +(Matrix a, Matrix b)
@@ -455,7 +449,7 @@ namespace Matrix
 
             var str = "";
             var len = 9;
-            var max = this.Max();
+            var max = Max();
             string formatStr;
 
             if (max < 100)
@@ -486,7 +480,7 @@ namespace Matrix
                 {
                     continue;
                 }
-                else if (n == maxRows)
+                if (n == maxRows)
                 {
                     for (var m = 0; m < maxCols+2; m++) str += "...".PadLeft(len + 2, ' ');
                 }
@@ -494,11 +488,9 @@ namespace Matrix
                 {
                     for (var m = 0; m < Cols; m++)
                     {
-                        if (m > maxCols && m != Cols - 1)
-                        {
-                            continue;
-                        }
-                        else if (m == maxCols)
+                        if (m > maxCols && m != Cols - 1) continue;
+
+                        if (m == maxCols)
                         {
                             str += "...".PadLeft(len + 2, ' ');
                         }
@@ -520,15 +512,15 @@ namespace Matrix
 
         protected bool Equals(Matrix other)
         {
-            return this==other;
+            return this == other;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Matrix)obj);
+            if (obj.GetType() != GetType()) return false;
+            return Equals((Matrix) obj);
         }
 
         public override int GetHashCode()

@@ -1,6 +1,4 @@
-﻿using Matrix.Tests;
-using Matrix.Tests.Utils;
-using System;
+﻿using Matrix.Tests.Utils;
 using System.Diagnostics;
 
 namespace Matrix.Tests.Timing
@@ -34,7 +32,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Equality check", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
+                tab.AddRow(new[] { "Equality check", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
         }
     }
 }

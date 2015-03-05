@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Matrix.Tests.Functional
 {
@@ -11,12 +7,12 @@ namespace Matrix.Tests.Functional
     {
         public static void Add(Matrix x, Matrix y, Matrix zShouldBe)
         {
-            Debug.WriteLine(string.Format("Matrix x set to: {0}{1}", Environment.NewLine, x));
-            Debug.WriteLine(string.Format("Matrix y set to: {0}{1}", Environment.NewLine, y));
+            Debug.WriteLine("Matrix x set to: {0}{1}", Environment.NewLine, x);
+            Debug.WriteLine("Matrix y set to: {0}{1}", Environment.NewLine, y);
 
             // + operator has override
             var z = x + y;
-            Debug.WriteLine(string.Format("Result of x + y (Matrix z) set to: {0}{1}", Environment.NewLine, z));
+            Debug.WriteLine("Result of x + y (Matrix z) set to: {0}{1}", Environment.NewLine, z);
 
             // this is also implicitly testing the overloaded equality operator on Matrix
             Debug.Assert(z == zShouldBe);

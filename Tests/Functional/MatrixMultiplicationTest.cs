@@ -7,12 +7,12 @@ namespace Matrix.Tests.Functional
     {
         public static void Multiply(Matrix a, Matrix b, Matrix cShouldBe)
         {
-            Debug.WriteLine(string.Format("Matrix a set to: {0}{1}", Environment.NewLine, a));
-            Debug.WriteLine(string.Format("Matrix b set to: {0}{1}", Environment.NewLine, b));
+            Debug.WriteLine("Matrix a set to: {0}{1}", Environment.NewLine, a);
+            Debug.WriteLine("Matrix b set to: {0}{1}", Environment.NewLine, b);
 
             // * operator has override to get dot product
             var c = a * b;
-            Debug.WriteLine(string.Format("Result of dot product (Matrix c) set to: {0}{1}", Environment.NewLine, c));
+            Debug.WriteLine("Result of dot product (Matrix c) set to: {0}{1}", Environment.NewLine, c);
 
             // this is also implicitly testing the overloaded equality operator on Matrix
             Debug.Assert(c == cShouldBe);

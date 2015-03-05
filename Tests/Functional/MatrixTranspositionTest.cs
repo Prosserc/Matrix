@@ -8,7 +8,7 @@ namespace Matrix.Tests.Functional
         public static void Transpose(Matrix m, Matrix mTransposedShouldBe)
         {
             m.Transpose();
-            Debug.WriteLine(string.Format("Result of Transposition on Matrix c: {0}{1}", Environment.NewLine, m));
+            Debug.WriteLine("Result of Transposition on Matrix c: {0}{1}", Environment.NewLine, m);
             Debug.Assert(m.Equals(mTransposedShouldBe));
         }
 

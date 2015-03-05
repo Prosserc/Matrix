@@ -28,7 +28,7 @@ namespace Matrix.Tests.Timing
 
             // report results
             if (tab != null)
-                tab.AddRow(new string[] { "Subtraction", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
+                tab.AddRow(new[] { "Subtraction", StringUtils.FormatDimentions(rows, cols), null, ms.ToString("#,###") });
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Matrix.Tests.Functional
         public static void GetSingleRow(Matrix a, int rowIndex=0)
         {
             Debug.Write(Environment.NewLine);
-            Debug.WriteLine(string.Format("Row {0} of Matrix a{1}{2}", rowIndex, Environment.NewLine, a.GetRows(rowIndex,1)));   
+            Debug.WriteLine("Row {0} of Matrix a{1}{2}", rowIndex, Environment.NewLine, a.GetRows(rowIndex,1));   
         }
 
         public static void GetMultipleRows(Matrix a, int rowIndex = 0, int numRows = 2)
         {
             Debug.Write(Environment.NewLine);
-            Debug.WriteLine(string.Format("Rows {0}:{1} of Matrix a{2}{3}", rowIndex, rowIndex+(numRows-1), Environment.NewLine, a.GetRows(rowIndex, numRows)));   
+            Debug.WriteLine("Rows {0}:{1} of Matrix a{2}{3}", rowIndex, rowIndex+(numRows-1), Environment.NewLine, a.GetRows(rowIndex, numRows));   
         }
 
         public static void GetAndManipulateRowsToCheckThatChangesPersistInOriginalMatrix(Matrix a, int rowIndex = 0, int numRows = 2)
@@ -31,13 +31,13 @@ namespace Matrix.Tests.Functional
                 }
             }
 
-            Debug.WriteLine(string.Format("tmpMatrix now set to:{0}{1}", Environment.NewLine, subMatrix));
-            Debug.WriteLine(string.Format("original matrix now set to:{0}{1}", Environment.NewLine, a));
+            Debug.WriteLine("tmpMatrix now set to:{0}{1}", Environment.NewLine, subMatrix);
+            Debug.WriteLine("original matrix now set to:{0}{1}", Environment.NewLine, a);
 
             // check that indexed row in original matrix has been updated to reflect changes in subMatrix
             for (var i = 0; i < numRows; i++)
             {
-                Debug.Assert(a[rowIndex = i].Equals(subMatrix[i]));
+                Debug.Assert(a[i].Equals(subMatrix[i]));
             }
         }
     }

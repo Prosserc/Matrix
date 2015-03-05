@@ -1,5 +1,4 @@
-﻿using Matrix.Tests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -14,9 +13,9 @@ namespace Matrix.Tests.Utils
         private const char RowBoundary = '-';
         private const string ColBoundary = "  |  ";
         private const string RowColBoundary = "--+--";
-        private const string RowPrefix = "    ";
-        private const string RowSuffix = "";
         private const Alignment DefaultAlignment = Alignment.Left;
+        private const bool CentreOnPage = true;
+        private const int RowWidth = 145;
 
         /// <summary>Object to capture tabular data and output to the debug console.</summary>
         /// <param name="heads">string[] - array of string values for table headings</param>
@@ -80,7 +79,8 @@ namespace Matrix.Tests.Utils
 
         private void AddRow(string str)
         {
-            _rows.Enqueue(RowPrefix + str + RowSuffix);
+            var rowPrefix = CentreOnPage ? new string(' ', (RowWidth - str.Length) / 2) : "";
+            _rows.Enqueue(rowPrefix + str);
         }
 
         private void Initialise(string[] heads, int[] colWidths, Alignment[] alignments = null, Alignment[] headsAlignments = null)
