@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Matrix.RefData;
+using Matrix.Utils;
+using System;
 using System.Diagnostics;
 
 namespace Matrix.Tests.Timing
@@ -6,12 +8,12 @@ namespace Matrix.Tests.Timing
     static class MatrixMultiplicationTimeTest
     {
         // shorthand for constructor with square Matrices
-        public static void Multiply(int squareMatrixDimentions)
+        public static void Multiply(int squareMatrixDimentions, TablePrinter tab = null)
         {
-            Multiply(squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions);
+            Multiply(squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions, squareMatrixDimentions, tab);
         }
 
-        public static void Multiply(int m1Rows, int m1Cols, int m2Rows, int m2Cols)
+        public static void Multiply(int m1Rows, int m1Cols, int m2Rows, int m2Cols, TablePrinter tab = null)
         {
             Debug.Write(Environment.NewLine);
 
@@ -26,6 +28,8 @@ namespace Matrix.Tests.Timing
             watch.Stop();
 
             // report results
+            tab.AddRow(new string[] { "Multiplication", string.Format("{0} x {1} and {2} x {3}", m1Rows, m1Cols, m2Rows, m2Cols), ms.ToString() }, 
+                       new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Right });
             var msg = string.Format("Multiplication took {0} ms on {1} x {2} and {3} x {4} Matrices. Result:", ms, m1Rows, m1Cols, m2Rows, m2Cols);
             Debug.WriteLine("{0}{1}{2}{3}{4}", msg, Environment.NewLine, new string('-', msg.Length-1), Environment.NewLine, m3);
         }

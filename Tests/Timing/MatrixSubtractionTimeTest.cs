@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Matrix.RefData;
+using Matrix.Utils;
+using System;
 using System.Diagnostics;
 
 namespace Matrix.Tests.Timing
@@ -6,12 +8,12 @@ namespace Matrix.Tests.Timing
     static class MatrixSubtractionTimeTest
     {
         // shorthand for constructor with square Matrices
-        public static void Subtract(int squareMatrixDimentions)
+        public static void Subtract(int squareMatrixDimentions, TablePrinter tab = null)
         {
-            Subtract(squareMatrixDimentions, squareMatrixDimentions);
+            Subtract(squareMatrixDimentions, squareMatrixDimentions, tab);
         }
 
-        public static void Subtract(int rows, int cols)
+        public static void Subtract(int rows, int cols, TablePrinter tab = null)
         {
             // prep data
             var m1 = new Matrix(rows, cols, initialiseWithRandomValues: true);
@@ -24,7 +26,9 @@ namespace Matrix.Tests.Timing
             watch.Stop();
 
             // report results
-            Debug.WriteLine(string.Format("*** Subtraction took {0} ms on {1} x {2} Matrices ***", ms, rows, cols));
+            if (tab != null)
+                tab.AddRow(new string[] { "Subtraction", string.Format("{0} x {1}", rows, cols), ms.ToString() },
+                           new Alignment[] { Alignment.Left, Alignment.Left, Alignment.Right });
         }
     }
 }

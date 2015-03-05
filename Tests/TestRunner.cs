@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Matrix.Tests.Data;
 using Matrix.Tests.Functional;
 using Matrix.Tests.Timing;
+using Matrix.Utils;
 
 namespace Matrix.Tests
 {
@@ -52,42 +53,48 @@ namespace Matrix.Tests
             MatrixGetColsTest.GetSingleCol(a);
             MatrixGetColsTest.GetMultipleCols(a);
 
+
+
+            var tab = new TablePrinter(new string[] { "Operation", "Dimentions", "Run Time (ms)" }, 25);
+
             // test multiplication run time
-            MatrixMultiplicationTimeTest.Multiply(1000, 20, 20, 1000); 
-            MatrixMultiplicationTimeTest.Multiply(128);
-            MatrixMultiplicationTimeTest.Multiply(256);
-            MatrixMultiplicationTimeTest.Multiply(512);
+            MatrixMultiplicationTimeTest.Multiply(1000, 20, 20, 1000, tab);
+            MatrixMultiplicationTimeTest.Multiply(128, tab);
+            MatrixMultiplicationTimeTest.Multiply(256, tab);
+            MatrixMultiplicationTimeTest.Multiply(512, tab);
 
             // test transposition run time
-            MatrixTranpositionTimeTest.Transpose(256, 256);
-            MatrixTranpositionTimeTest.Transpose(512, 512);
-            MatrixTranpositionTimeTest.Transpose(1024, 1024);
-            MatrixTranpositionTimeTest.Transpose(200, 10000);
-            MatrixTranpositionTimeTest.Transpose(10000, 200);
+            MatrixTranpositionTimeTest.Transpose(256, 256, tab);
+            MatrixTranpositionTimeTest.Transpose(512, 512, tab);
+            MatrixTranpositionTimeTest.Transpose(1024, 1024, tab);
+            MatrixTranpositionTimeTest.Transpose(200, 10000, tab);
+            MatrixTranpositionTimeTest.Transpose(10000, 200, tab);
 
             // test addition run time
-            MatrixAdditionTimeTest.Add(256);
-            MatrixAdditionTimeTest.Add(512);
-            MatrixAdditionTimeTest.Add(1024);
-            MatrixAdditionTimeTest.Add(500, 5000);
+            MatrixAdditionTimeTest.Add(256, tab);
+            MatrixAdditionTimeTest.Add(512, tab);
+            MatrixAdditionTimeTest.Add(1024, tab);
+            MatrixAdditionTimeTest.Add(500, 5000, tab);
             //MatrixAdditionTimeTest.Add(10000); // ~2.9 secs on home Laptop (see improvement after parallelisation
 
             // test subtraction run time
-            MatrixSubtractionTimeTest.Subtract(256);
-            MatrixSubtractionTimeTest.Subtract(512);
-            MatrixSubtractionTimeTest.Subtract(1024);
-            MatrixSubtractionTimeTest.Subtract(500, 5000);
+            MatrixSubtractionTimeTest.Subtract(256, tab);
+            MatrixSubtractionTimeTest.Subtract(512, tab);
+            MatrixSubtractionTimeTest.Subtract(1024, tab);
+            MatrixSubtractionTimeTest.Subtract(500, 5000, tab);
 
             // test subtraction run time
-            MatrixEqualityTimeTest.CheckEquality(256);
-            MatrixEqualityTimeTest.CheckEquality(512);
-            MatrixEqualityTimeTest.CheckEquality(1024);
-            MatrixEqualityTimeTest.CheckEquality(500, 5000);
+            MatrixEqualityTimeTest.CheckEquality(256, tab);
+            MatrixEqualityTimeTest.CheckEquality(512, tab);
+            MatrixEqualityTimeTest.CheckEquality(1024, tab);
+            MatrixEqualityTimeTest.CheckEquality(500, 5000, tab);
+
+            tab.Print();
 
             var secs = ((Double)watch.ElapsedMilliseconds)/1000;
             watch.Stop();
             var msg = String.Format("Test suite took {0:0.###} seconds to run", secs);
-            Utils.PrintTitle(msg);
+            StringUtils.PrintTitle(msg);
         }
     }
 }

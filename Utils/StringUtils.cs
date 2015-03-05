@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Matrix
+namespace Matrix.Utils
 {
-    static class Utils
+    static class StringUtils
     {
         public static void PrintTitle(string msg, char borderChar = '*', int width = 145, char padChar = ' ', int padSize = 1, bool convToUpper = true)
         {
