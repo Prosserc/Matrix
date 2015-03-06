@@ -1,4 +1,6 @@
-﻿using Matrix.Tests;
+﻿using System;
+using System.Diagnostics;
+using Matrix.Tests;
 
 namespace Matrix
 {

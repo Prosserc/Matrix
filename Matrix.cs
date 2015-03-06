@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Matrix.Tests;
@@ -13,12 +12,13 @@ namespace Matrix
     /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
     /// TODO:
     ///     inverse method;
+    ///     identity Matrices;
     ///     elementwise operations;
     ///         - consider multiplication with numbers e.g. matrix * 2
-    ///     identity Matrices;
     ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;
-    ///     Performance could be optimised for +,-,==,!= and T() e.g. parallelisation - not urgent as already pretty quick;
+    ///     Performance could be optimised for +,-,==,!=, Max(), Min, Average() and T() e.g. parallelisation - not urgent as already pretty quick;
+    ///     ??? allow for matrices containing values other than double e.g. bit, int etc - not sure how difficult this will be yet ???
     /// </remarks>
     public class Matrix
     {
@@ -28,6 +28,7 @@ namespace Matrix
         
 
         /// <summary>Defines margin of error allowed to consider matrix elements equal - allowing for floating point precision errors.</summary>
+        /// <remarks>Double allows for 15-16 degits precision, so the value should be within this range.</remarks>
         public const double EPSILON = 10e-12;
         
         /// <summary>
@@ -199,6 +200,32 @@ namespace Matrix
             var x = Copy();
             x.Transpose();
             return x;
+        }
+
+        public Matrix GetIdentity()
+        {
+            var up = new Exception("Ambiguous request for identity matrix, use the static class method Matrix.GetIdentity(int) for non square matrices.");
+            if (Rows != Cols) throw up;
+            return GetIdentity(Rows);
+        }
+
+        /// <summary>
+        /// Gets identity matrix of specified dimentions.
+        /// </summary>
+        /// <param name="rows">int - required dimentions of identity matrix</param>
+        /// <returns></returns>
+        public static Matrix GetIdentity(int rows)
+        {
+            var id = new Matrix(rows, rows);
+            for (var i = 0; i < rows; i++)
+            {
+                for (var j = 0; j < rows; j++)
+                {
+                    id[i][j] = i == j ? 1 : 0;
+                }
+            }
+
+            return id;
         }
 
         /// <summary>

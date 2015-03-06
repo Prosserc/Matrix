@@ -41,6 +41,9 @@ namespace Matrix.Tests
             var c2 = MatrixTranspositionTest.GetTransposedCopy(c);
             MatrixTranspositionTest.TestEquality(c2, cShouldBe);
 
+            // test identity matrices
+            MatrixIdentityTest.IdentityTests();
+
             // test indexing
             MatrixIndexerTest.GetViaIndex(a, 1, 1, -4);
             MatrixIndexerTest.SetViaIndex(a, 1, 1);
