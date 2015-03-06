@@ -12,23 +12,23 @@ namespace Matrix
     /// <remarks>
     /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
     /// TODO:
-    ///     timing tests for large +/-/==/!= operators;
-    ///         - if reqd performance optimisation for any of above;
     ///     inverse method;
     ///     elementwise operations;
     ///         - consider multiplication with numbers e.g. matrix * 2
     ///     identity Matrices;
     ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;
+    ///     Performance could be optimised for +,-,==,!= and T() e.g. parallelisation - not urgent as already pretty quick;
     /// </remarks>
     public class Matrix
     {
         private double[][] _val;
         public int Rows { get; private set; }
         public int Cols { get; private set; }
+        
 
         /// <summary>Defines margin of error allowed to consider matrix elements equal - allowing for floating point precision errors.</summary>
-        public const double EPSILON = 0.000001;
+        public const double EPSILON = 10e-12;
         
         /// <summary>
         /// Constructor, creates Matrix object from jagged array.
@@ -304,9 +304,10 @@ namespace Matrix
         /// Gets the Dot Product from the multiplication of two Matrices. Note: the number of columns in the first matrix must be equal to the number of rows in the second matrix.
         /// </summary>
         /// <param name="a">matrix - first matrix for multiplication</param>
-        /// <param name="b">matrix - seconf matrix for multiplication</param>
+        /// <param name="b">matrix - second matrix for multiplication</param>
         /// <remarks>Changed ijk to ikj loop for performance optimisation.</remarks>
         /// <returns>Matrix of double[a.Rows][b.Cols]</returns>
+        /// <exception cref="IncompatibleMatrixDimentionsException(MatrixOperators)"></exception>
         public static Matrix DotProduct(Matrix a, Matrix b)
         {
             // check dimentions
@@ -347,7 +348,9 @@ namespace Matrix
         // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 
-        /// allow for easy calculation of dot product of Matrices e.g. A*B
+        /// <summary>Operator overload to allow for easy calculation of dot product of Matrices e.g. A*B.</summary>
+        /// <see cref="DotProduct(Matrix,Matrix)"/> for more information.
+        /// <exception cref="IncompatibleMatrixDimentionsException(MatrixOperators)"></exception>
         public static Matrix operator *(Matrix a, Matrix b)
         {
             return DotProduct(a, b);
@@ -396,6 +399,7 @@ namespace Matrix
             
         }
 
+        /// <exception cref="IncompatibleMatrixDimentionsException(MatrixOperators)"></exception>
         public static Matrix operator +(Matrix a, Matrix b)
         {
             // check dimentions
@@ -419,6 +423,7 @@ namespace Matrix
                 return res;
         }
 
+        /// <exception cref="IncompatibleMatrixDimentionsException(MatrixOperators)"></exception>
         public static Matrix operator -(Matrix a, Matrix b)
         {
             // check dimentions

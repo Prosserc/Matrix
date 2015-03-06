@@ -7,7 +7,7 @@ namespace Matrix.Tests.Functional
     {
         public static void Subtract(Matrix x, Matrix y, Matrix zShouldBe)
         {
-            // - operator has override
+            // - operator has overload
             var z = x - y;
             Debug.WriteLine("Result of x - y (Matrix z) set to: {0}{1}", Environment.NewLine, z);
 

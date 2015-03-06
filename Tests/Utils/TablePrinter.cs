@@ -12,6 +12,7 @@ namespace Matrix.Tests.Utils
         private Queue<string> _rows;
         private const char RowBoundary = '-'; // e.g. '-'
         private const string ColBoundary = "     "; // e.g. "  |  "
+        /// <summary>Note: if RowColBoundary only contains the RowBoundary character, it will be eliminated by trims and write an empty line.</summary>
         private const string RowColBoundary = "-----"; // e.g. "--+--"
         private const Alignment DefaultAlignment = Alignment.Left;
         private const bool CentreOnPage = false;
@@ -20,8 +21,8 @@ namespace Matrix.Tests.Utils
         /// <summary>Object to capture tabular data and output to the debug console.</summary>
         /// <param name="heads">string[] - array of string values for table headings</param>
         /// <param name="colWidths">int - standard width for all cols (use other constructor for sepcific widths)</param>
-        /// <param name="alignments">optional alignments[] - array of alignments to be applied to table, leave blank for defaults</param>
-        /// <param name="headsAlignments">optional alignments[] - array of alignments to be applied to heads, leave blank for defaults</param>
+        /// <param name="alignments">optional alignments[] - array of alignments to be applied to table, emit parameter defaults</param>
+        /// <param name="headsAlignments">optional alignments[] - array of alignments to be applied to heads, emit parameter defaults</param>
         public TablePrinter(string[] heads, int colWidths = 16, Alignment[] alignments = null, Alignment[] headsAlignments = null)
         {
             var colWidthsArray = new int[heads.Length];
@@ -32,13 +33,15 @@ namespace Matrix.Tests.Utils
         /// <summary>Object to capture tabular data and output to the debug console.</summary>
         /// <param name="heads">string[] - array of string values for table headings</param>
         /// <param name="colWidths">int[] - array of integers representing required width for each column</param>
-        /// <param name="alignments">optional alignments[] - array of alignments to be applied to table, leave blank for defaults</param>
-        /// <param name="headsAlignments">optional alignments[] - array of alignments to be applied to heads, leave blank for defaults</param>
+        /// <param name="alignments">optional alignments[] - array of alignments to be applied to table, emit parameter defaults</param>
+        /// <param name="headsAlignments">optional alignments[] - array of alignments to be applied to heads, emit parameter defaults</param>
         public TablePrinter(string[] heads, int[] colWidths, Alignment[] alignments = null, Alignment[] headsAlignments = null)
         {
             Initialise(heads, colWidths, alignments, headsAlignments);
         }
 
+        /// <summary>Print the table that has been built up in this object to the debug window. 
+        /// (A vertical boundary is automaticaly added to the bottom to close the table off).</summary>
         [Conditional("DEBUG")]
         public void Print()
         {
@@ -47,7 +50,7 @@ namespace Matrix.Tests.Utils
             foreach (var row in _rows) Debug.WriteLine(row);
         }
 
-        /// <summary>Add row to printable table. Exclude alignments to use those already specified in constructor.</summary>
+        /// <summary>Add row to printable table. Exclude alignments parameter to use those already specified in constructor.</summary>
         /// <param name="rowData">string[] - array of string values to be written to table</param>
         /// <param name="alignments">optional alignment[] - only provide if you want to override those set in constructor</param>
         public void AddRow(string[] rowData, Alignment[] alignments = null)
@@ -58,6 +61,8 @@ namespace Matrix.Tests.Utils
             for (var i = 0; i < n; i++)
             {
                 var val = rowData[i] ?? "";
+                if (val.Length > _colWidths[i]) val = val.Substring(0, _colWidths[i]);
+
                 switch (useAlignments[i])
                 {
                     case Alignment.Left:
@@ -77,6 +82,7 @@ namespace Matrix.Tests.Utils
             AddRow(str.TrimEnd(' '));
         }
 
+        /// <summary>All public methods form a string and then call this.</summary>
         private void AddRow(string str)
         {
             var rowPrefix = CentreOnPage ? new string(' ', (RowWidth - str.Length) / 2) : "";
@@ -92,6 +98,8 @@ namespace Matrix.Tests.Utils
             AddHeads(headsAlignments ?? DefaultAlignments());
         }
 
+        /// <summary>Row boundaries are automatically added for the headers and the bottom of the table. This method can be used to 
+        /// introduce additional boundaries to split the table into sections.</summary>
         public void AddVerticalBoundaryRow()
         {
             var str = RowColBoundary.TrimStart(RowBoundary);

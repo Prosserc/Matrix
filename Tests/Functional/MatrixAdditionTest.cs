@@ -10,7 +10,7 @@ namespace Matrix.Tests.Functional
             Debug.WriteLine("Matrix x set to: {0}{1}", Environment.NewLine, x);
             Debug.WriteLine("Matrix y set to: {0}{1}", Environment.NewLine, y);
 
-            // + operator has override
+            // + operator has overload
             var z = x + y;
             Debug.WriteLine("Result of x + y (Matrix z) set to: {0}{1}", Environment.NewLine, z);
 

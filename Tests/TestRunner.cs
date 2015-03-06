@@ -18,6 +18,7 @@ namespace Matrix.Tests
             var a = staticData.A;
             var b = staticData.B;
             var cShouldBe = staticData.ATimesBShouldBe;
+            
 
             // test multiplication result
             MatrixMultiplicationTest.Multiply(a, b, cShouldBe);
@@ -55,8 +56,8 @@ namespace Matrix.Tests
 
 
             var tab = new TablePrinter(new[] { "Operation", "Dimentions 1", "Dimentions 2", "Run Time (ms)" }, 
-                                       new[] { 16, 16, 16, 13 },
-                                       new[] { Alignment.Left, Alignment.Left, Alignment.Left, Alignment.Right },
+                                       new[] { 18, 18, 18, 18 },
+                                       new[] { Alignment.Left, Alignment.Centre, Alignment.Centre, Alignment.Right },
                                        new[] { Alignment.Centre, Alignment.Centre, Alignment.Centre, Alignment.Centre} );
 
             // test multiplication run time
