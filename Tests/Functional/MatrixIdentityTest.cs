@@ -23,7 +23,7 @@ namespace Matrix.Tests.Functional
             Debug.Assert(b == (b * bColsId));
 
             var bRowsId = Matrix.GetIdentity(b.Rows);
-            Debug.Print("Identity Matrix for bRowssId:{0}{1}", Environment.NewLine, bRowsId);
+            Debug.Print("Identity Matrix for bRowsId:{0}{1}", Environment.NewLine, bRowsId);
             Debug.Print("bRowsId * b :{0}{1}", Environment.NewLine, bRowsId * b);
             Debug.Assert(b == (bRowsId * b));
         }

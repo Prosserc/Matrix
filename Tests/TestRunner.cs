@@ -14,29 +14,22 @@ namespace Matrix.Tests
             var watch = Stopwatch.StartNew();
 
             // get static data for tests
-            var staticData = new StaticData();
-            var a = staticData.A;
-            var b = staticData.B;
-            var cShouldBe = staticData.ATimesBShouldBe;
+            var data = new StaticData();
+            var a = data.A;
+            var b = data.B;
+            var cShouldBe = data.ATimesBShouldBe;
             
-
             // test multiplication result
             MatrixMultiplicationTest.Multiply(a, b, cShouldBe);
+            MatrixMultiplicationTest.MultiplyScalar(a, data.ScalarValue, data.ATimesScalarValueShouldBe);
 
-            // test addition result
-            var d = staticData.D;
-            var e = staticData.E;
-            var fShouldBe = staticData.DPlusEShouldBe;
-            MatrixAdditionTest.Add(d, e, fShouldBe);
-
-            // test subtraction result
-            var gShouldBe = staticData.DMinusEShouldBe;
-            MatrixSubtractionTest.Subtract(d, e, gShouldBe);
+            // test addition and subtraction results
+            MatrixAdditionTest.Add(data.D, data.E, data.DPlusEShouldBe);
+            MatrixSubtractionTest.Subtract(data.D, data.E, data.DMinusEShouldBe);
             
             // test transpoition result
             var c = a * b;
-            var cTransposedShouldBe = staticData.CTransposedShouldBe;
-            MatrixTranspositionTest.Transpose(c, cTransposedShouldBe);
+            MatrixTranspositionTest.Transpose(c, data.CTransposedShouldBe);
             // transpose c again to return it to original
             var c2 = MatrixTranspositionTest.GetTransposedCopy(c);
             MatrixTranspositionTest.TestEquality(c2, cShouldBe);

@@ -24,5 +24,12 @@ namespace Matrix.Tests.Functional
             c[0][0] = 999;
             Debug.Assert(c != cShouldBe);
         }
+
+        public static void MultiplyScalar(Matrix a, double scalarValue, Matrix resultShouldBe)
+        {
+            Debug.Assert(a*scalarValue == resultShouldBe);
+            Debug.Assert(scalarValue*a == resultShouldBe);
+            Debug.Assert((a * scalarValue) * 3.14592 == resultShouldBe * 3.14592);
+        }
     }
 }

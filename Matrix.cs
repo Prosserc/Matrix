@@ -6,15 +6,13 @@ using Matrix.Tests;
 namespace Matrix
 {
     /// <summary>
-    /// Allows indexing and operations such as * + - and == directly on matrix object
+    /// Allows indexing and operations such as * + - and == directly on matrix object. Intended to support statistical modelling and machine learning.
     /// </summary>
     /// <remarks>
     /// Initially tried 2d array, jagged array seems to get better performance on multiplication (~30% saving)
     /// TODO:
     ///     inverse method;
-    ///     identity Matrices;
     ///     elementwise operations;
-    ///         - consider multiplication with numbers e.g. matrix * 2
     ///     options to load Matrix data from files;
     ///     consider other operations that may be useful for machine learning;
     ///     Performance could be optimised for +,-,==,!=, Max(), Min, Average() and T() e.g. parallelisation - not urgent as already pretty quick;
@@ -375,12 +373,43 @@ namespace Matrix
         // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 
-        /// <summary>Operator overload to allow for easy calculation of dot product of Matrices e.g. A*B.</summary>
+        /// <summary>
+        /// Operator overload to allow for easy calculation of dot product of Matrices e.g. a*b.
+        /// </summary>
         /// <see cref="DotProduct(Matrix,Matrix)"/> for more information.
         /// <exception cref="IncompatibleMatrixDimentionsException(MatrixOperators)"></exception>
         public static Matrix operator *(Matrix a, Matrix b)
         {
             return DotProduct(a, b);
+        }
+
+        /// <summary>
+        /// Operator overload to allow for scalar multiplication with matrices e.g. 2*b.
+        /// </summary>
+        /// <param name="a">double - scalar value to be multiplied with matrix</param>
+        /// <param name="b">matrix - to be multiplied by sclar value (each element)</param>
+        /// <returns>Matrix resulting from the multiplication</returns>
+        public static Matrix operator *(double a, Matrix b)
+        {
+            var res = new Matrix(b.Rows, b.Cols);
+            for (var i = 0; i < b.Rows; i++)
+            {
+                for (var j = 0; j < b.Cols; j++)
+                {
+                    res[i][j] = a*b[i][j];
+                }
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Operator overload to allow for scalar multiplication with matrices e.g. a*2.
+        /// </summary>
+        /// <see cref="operator *(double, Matrix)"/>
+        public static Matrix operator *(Matrix a, double b)
+        {
+            return b*a;
         }
 
         // allow for indexing directly on Matrix rather than just Matrix.val

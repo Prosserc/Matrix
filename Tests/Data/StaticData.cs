@@ -5,6 +5,8 @@
         public Matrix A { get; set; }
         public Matrix B { get; set; }
         public Matrix ATimesBShouldBe { get; set; }
+        public double ScalarValue { get; set; }
+        public Matrix ATimesScalarValueShouldBe { get; set; }
         public Matrix CTransposedShouldBe { get; set; }
         public Matrix D { get; set; }
         public Matrix E { get; set; }
@@ -30,6 +32,14 @@
             ATimesBShouldBe[1] = new double[] { 10, 18, 21, -17, 22 };
             ATimesBShouldBe[2] = new double[] { 6, -22, -2, -10, 12 };
             ATimesBShouldBe[3] = new double[] { -13, -1, -7, 6, -9 };
+
+            // used to validate scalar multiplication
+            ScalarValue = 5;
+            ATimesScalarValueShouldBe = new Matrix(4, 3);
+            ATimesScalarValueShouldBe[0] = new [] { A[0][0] * ScalarValue, A[0][1] * ScalarValue, A[0][2] * ScalarValue };
+            ATimesScalarValueShouldBe[1] = new [] { A[1][0] * ScalarValue, A[1][1] * ScalarValue, A[1][2] * ScalarValue };
+            ATimesScalarValueShouldBe[2] = new [] { A[2][0] * ScalarValue, A[2][1] * ScalarValue, A[2][2] * ScalarValue };
+            ATimesScalarValueShouldBe[3] = new [] { A[3][0] * ScalarValue, A[3][1] * ScalarValue, A[3][2] * ScalarValue };
 
             CTransposedShouldBe = new Matrix(5, 4);
             CTransposedShouldBe[0] = new double[] { -16, 10, 6, -13 };
