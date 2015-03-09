@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using Matrix.Exceptions;
 using Matrix.Tests;
 
 namespace Matrix
@@ -200,6 +201,36 @@ namespace Matrix
             return x;
         }
 
+        // TODO - implement method and create tests
+        /// <summary>
+        /// ** Not Implemented ** Gets the inverse of the matrix (if it exists).
+        /// </summary>
+        /// <remarks>Uses Elementary Row Operations (Gauss-Jordan method).</remarks>
+        /// <returns>Inverted copy of Matrix</returns>
+        /// <exception cref="NonInvertibleMatrixException(string)"></exception>
+        /// <exception cref="NotImplementedException"></exception>
+        public Matrix GetInverse()
+        {
+            if (Rows != Cols)
+            {
+                throw new NonInvertibleMatrixException("Non square matrices can not be inverted.");
+            }
+            throw new NotImplementedException();
+        }
+        
+        /// <summary>
+        /// Gets identity matrix.
+        /// </summary>
+        /// <returns>Identity matrix</returns>
+        public Matrix GetI()
+        {
+            return GetIdentity();
+        }
+
+        /// <summary>
+        /// Gets identity matrix.
+        /// </summary>
+        /// <returns>Identity matrix</returns>
         public Matrix GetIdentity()
         {
             var up = new Exception("Ambiguous request for identity matrix, use the static class method Matrix.GetIdentity(int) for non square matrices.");
@@ -211,7 +242,7 @@ namespace Matrix
         /// Gets identity matrix of specified dimentions.
         /// </summary>
         /// <param name="rows">int - required dimentions of identity matrix</param>
-        /// <returns></returns>
+        /// <returns>Identity matrix</returns>
         public static Matrix GetIdentity(int rows)
         {
             var id = new Matrix(rows, rows);

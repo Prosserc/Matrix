@@ -15,6 +15,13 @@ namespace Matrix
         };
 
         public IncompatibleMatrixDimentionsException(MatrixOperators op)
-            : base (MsgDict[op]) {}
+            : base(MsgDict[op])
+        {
+        }
+
+        public IncompatibleMatrixDimentionsException(string msg)
+            : base(msg)
+        {
+        }
     }
 }
