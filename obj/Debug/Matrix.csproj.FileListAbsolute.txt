@@ -14,3 +14,19 @@ C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.exe
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.pdb
 C:\Users\Prosserc\Documents\Visual Studio 2012\Projects\Matrix\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\bin\Debug\Matrix.exe.config
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\obj\Debug\Matrix.exe
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\obj\Debug\Matrix.pdb
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\bin\Debug\Matrix.exe
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\bin\Debug\Matrix.pdb
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\obj\Debug\Matrix.Properties.Resources.resources
+C:\Users\Chris\Dropbox\Docs\Visual Studio 2015\Projects\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
+C:\Users\Chris\Dropbox\code\c#\Matrix\bin\Debug\Matrix.exe.config
+C:\Users\Chris\Dropbox\code\c#\Matrix\bin\Debug\Matrix.exe
+C:\Users\Chris\Dropbox\code\c#\Matrix\bin\Debug\Matrix.pdb
+C:\Users\Chris\Dropbox\code\c#\Matrix\obj\Debug\Matrix.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Dropbox\code\c#\Matrix\obj\Debug\Matrix.Properties.Resources.resources
+C:\Users\Chris\Dropbox\code\c#\Matrix\obj\Debug\Matrix.csproj.GenerateResource.Cache
+C:\Users\Chris\Dropbox\code\c#\Matrix\obj\Debug\Matrix.exe
+C:\Users\Chris\Dropbox\code\c#\Matrix\obj\Debug\Matrix.pdb
